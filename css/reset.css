@@ -1,0 +1,55 @@
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:            #1b2838;
+  --bg-header:     #171a21;
+  --bg-card:       #2a475e;
+  --bg-card-hover: #3b6a8a;
+  --bg-section:    #1e2d3d;
+  --accent:        #66c0f4;
+  --accent-dark:   #4fa8d8;
+  --text:          #c7d5e0;
+  --text-muted:    #8f98a0;
+  --green:         #a4d007;
+  --red:           #e06c6c;
+  --radius:        8px;
+  --shadow:        0 4px 16px rgba(0,0,0,0.4);
+  --transition:    0.2s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}

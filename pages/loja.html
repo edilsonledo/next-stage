@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Next Stage — Loja de jogos em alta na Steam.">
+  <title>Loja — Next Stage</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <a href="../index.html" class="header__logo">🎮 Next Stage</a>
+  <nav class="nav" id="mainNav">
+    <ul class="nav__list">
+      <li><a class="nav__link" href="../index.html">Início</a></li>
+      <li><a class="nav__link" href="loja.html">Loja</a></li>
+      <li><a class="nav__link" href="recomendacoes.html">Recomendações</a></li>
+    </ul>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main class="container">
+
+  <div class="page-header">
+    <h1>🛒 Loja</h1>
+    <p>Explore os jogos mais populares da Steam em tempo real.</p>
+  </div>
+
+  <!-- Busca -->
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Buscar jogo pelo nome...">
+    <button class="btn" id="search-btn">Buscar</button>
+  </div>
+
+  <!-- Filtros de categoria -->
+  <div class="filter-tabs">
+    <button class="filter-tab active" data-cat="top100in2weeks">🔥 Mais jogados agora</button>
+    <button class="filter-tab" data-cat="top100forever">🏆 Todos os tempos</button>
+    <button class="filter-tab" data-cat="top100owned">📦 Mais possuídos</button>
+  </div>
+
+  <h2 class="section-title" id="loja-titulo">🔥 Mais jogados (2 semanas)</h2>
+  <div id="loja-grid" class="grid"></div>
+
+</main>
+
+<footer class="footer">
+  © 2026 Next Stage &nbsp;·&nbsp;
+  Dados via <a href="https://steamspy.com" target="_blank" rel="noopener">SteamSpy</a>
+</footer>
+
+<script type="module" src="../js/loja.js"></script>
+</body>
+</html>
