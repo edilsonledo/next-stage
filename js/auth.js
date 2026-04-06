@@ -25,12 +25,13 @@ import {
 //    https://console.firebase.google.com
 // ──────────────────────────────────────────────
 const firebaseConfig = {
-  apiKey:            "COLE_SUA_API_KEY",
-  authDomain:        "COLE_SEU_AUTH_DOMAIN",
-  projectId:         "COLE_SEU_PROJECT_ID",
-  storageBucket:     "COLE_SEU_STORAGE_BUCKET",
-  messagingSenderId: "COLE_SEU_MESSAGING_SENDER_ID",
-  appId:             "COLE_SEU_APP_ID"
+  apiKey:            "AIzaSyBs4fZdhJdyazQs6K4k0JiwQn0feIp5fkU",
+  authDomain:        "site-next-stage.firebaseapp.com",
+  projectId:         "site-next-stage",
+  storageBucket:     "site-next-stage.firebasestorage.app",
+  messagingSenderId: "859717494179",
+  appId:             "1:859717494179:web:6fbc2ecf087b80ee39e616",
+  measurementId:     "G-TK4BFKL0GV"
 };
 // ──────────────────────────────────────────────
 
