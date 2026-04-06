@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catalogo de jogos recomendados pelo Next Stage.">
+  <title>Catalogo — Next Stage</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <a href="../index.html" class="header__logo">Next Stage</a>
+  <nav class="nav" id="mainNav">
+    <ul class="nav__list">
+      <li><a class="nav__link" href="../index.html">Inicio</a></li>
+      <li><a class="nav__link" href="quiz.html">Encontrar Jogo</a></li>
+      <li><a class="nav__link" href="catalogo.html">Catalogo</a></li>
+    </ul>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main class="container">
+
+  <div class="page-header">
+    <h1>📚 Catalogo de Jogos</h1>
+    <p>Todos os jogos curados pela comunidade Next Stage — filtrados por genero.</p>
+  </div>
+
+  <!-- Busca + filtros -->
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Buscar por nome...">
+    <button class="btn" id="search-btn">Buscar</button>
+  </div>
+
+  <div class="filter-tabs" id="genero-tabs"></div>
+
+  <h2 class="section-title" id="cat-titulo">Todos os jogos</h2>
+  <div id="catalogo-grid" class="grid"></div>
+
+</main>
+
+<footer class="footer">
+  &copy; 2026 Next Stage &nbsp;&middot;&nbsp; Feito para quem termina jogos
+</footer>
+
+<script type="module" src="../js/catalogo.js"></script>
+</body>
+</html>

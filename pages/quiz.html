@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Responda algumas perguntas e descubra seu proximo jogo.">
+  <title>Encontrar Jogo — Next Stage</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <a href="../index.html" class="header__logo">Next Stage</a>
+  <nav class="nav" id="mainNav">
+    <ul class="nav__list">
+      <li><a class="nav__link" href="../index.html">Inicio</a></li>
+      <li><a class="nav__link" href="quiz.html">Encontrar Jogo</a></li>
+      <li><a class="nav__link" href="catalogo.html">Catalogo</a></li>
+    </ul>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main class="container">
+  <div class="quiz-wrapper">
+
+    <!-- Progresso -->
+    <div class="quiz-progress" id="quiz-progress" style="justify-content:center; margin-bottom:32px;"></div>
+
+    <!-- Passo 1: ultimo jogo -->
+    <div class="quiz-step active" id="step-1">
+      <h2>Qual foi o ultimo jogo que voce terminou?</h2>
+      <p>Pode ser o nome exato ou algo parecido — so queremos entender de onde voce vem.</p>
+      <input type="text" class="quiz-input" id="input-ultimo-jogo" placeholder="Ex: Hades, The Witcher 3, Hollow Knight...">
+      <div class="quiz-nav">
+        <span></span>
+        <button class="btn" id="btn-step1-next">Proximo →</button>
+      </div>
+    </div>
+
+    <!-- Passo 2: o que mais gostou -->
+    <div class="quiz-step" id="step-2">
+      <h2>O que voce mais curtiu nesse jogo?</h2>
+      <p>Escolha o que mais combinou com sua experiencia.</p>
+      <div class="quiz-options" id="opts-curtiu">
+        <button class="quiz-option" data-val="historia">
+          <span class="opt-icon">📖</span> Historia e narrativa
+        </button>
+        <button class="quiz-option" data-val="gameplay">
+          <span class="opt-icon">🕹️</span> Gameplay e mecanicas
+        </button>
+        <button class="quiz-option" data-val="mundo">
+          <span class="opt-icon">🌍</span> Mundo e exploracao
+        </button>
+        <button class="quiz-option" data-val="desafio">
+          <span class="opt-icon">💀</span> A dificuldade e o desafio
+        </button>
+        <button class="quiz-option" data-val="arte">
+          <span class="opt-icon">🎨</span> Arte e atmosfera
+        </button>
+        <button class="quiz-option" data-val="personagens">
+          <span class="opt-icon">👥</span> Personagens marcantes
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn btn--outline" id="btn-step2-back">← Voltar</button>
+        <button class="btn" id="btn-step2-next">Proximo →</button>
+      </div>
+    </div>
+
+    <!-- Passo 3: genero preferido -->
+    <div class="quiz-step" id="step-3">
+      <h2>Que tipo de jogo voce quer agora?</h2>
+      <p>Pode ser algo parecido ou totalmente diferente — voce decide.</p>
+      <div class="quiz-options" id="opts-genero">
+        <button class="quiz-option" data-val="rpg">
+          <span class="opt-icon">⚔️</span> RPG / Aventura
+        </button>
+        <button class="quiz-option" data-val="acao">
+          <span class="opt-icon">🔥</span> Acao / Luta
+        </button>
+        <button class="quiz-option" data-val="souls">
+          <span class="opt-icon">💀</span> Souls-like / Desafio
+        </button>
+        <button class="quiz-option" data-val="plataforma">
+          <span class="opt-icon">🏃</span> Plataforma / Indie
+        </button>
+        <button class="quiz-option" data-val="estrategia">
+          <span class="opt-icon">🧠</span> Estrategia / Puzzle
+        </button>
+        <button class="quiz-option" data-val="relaxante">
+          <span class="opt-icon">🌿</span> Relaxante / Simulacao
+        </button>
+        <button class="quiz-option" data-val="coop">
+          <span class="opt-icon">👫</span> Co-op / Multijogador
+        </button>
+        <button class="quiz-option" data-val="surpresa">
+          <span class="opt-icon">🎲</span> Me surpreenda
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn btn--outline" id="btn-step3-back">← Voltar</button>
+        <button class="btn" id="btn-step3-next">Proximo →</button>
+      </div>
+    </div>
+
+    <!-- Passo 4: quanto tempo tem -->
+    <div class="quiz-step" id="step-4">
+      <h2>Quanto tempo voce tem para jogar?</h2>
+      <p>Isso nos ajuda a recomendar jogos com o tamanho certo para voce.</p>
+      <div class="quiz-options" id="opts-tempo">
+        <button class="quiz-option" data-val="curto">
+          <span class="opt-icon">⚡</span> Pouco tempo<br><small>Jogos de 5-15h</small>
+        </button>
+        <button class="quiz-option" data-val="medio">
+          <span class="opt-icon">⏱️</span> Tempo moderado<br><small>Jogos de 20-40h</small>
+        </button>
+        <button class="quiz-option" data-val="longo">
+          <span class="opt-icon">🕰️</span> Bastante tempo<br><small>Jogos de 50h+</small>
+        </button>
+        <button class="quiz-option" data-val="qualquer">
+          <span class="opt-icon">♾️</span> Tanto faz<br><small>Quero o melhor</small>
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn btn--outline" id="btn-step4-back">← Voltar</button>
+        <button class="btn" id="btn-step4-next">Ver meu proximo jogo 🚀</button>
+      </div>
+    </div>
+
+    <!-- Resultado -->
+    <div class="quiz-step" id="step-resultado"></div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  &copy; 2026 Next Stage &nbsp;&middot;&nbsp; Feito para quem termina jogos
+</footer>
+
+<script type="module" src="../js/quiz.js"></script>
+</body>
+</html>
