@@ -1,4 +1,5 @@
 ﻿import { imgTag, abrirSteam, initHamburger, marcarNavAtivo } from "./utils.js";
+import { initAuthHeader } from "./authHeader.js";
 window.abrirSteam = abrirSteam;
 
 // ── Banco de dados de ressacas famosas ──
@@ -160,6 +161,7 @@ function initMood() {
 }
 
 initHamburger();
+initAuthHeader();
 marcarNavAtivo();
 renderRessacas();
 initMood();

@@ -834,3 +834,275 @@
 
   .container { padding: 16px 12px; }
 }
+
+/* ════════════════════════════════════════
+   AUTH — Botão e avatar no header
+════════════════════════════════════════ */
+.auth-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+.auth-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition), color var(--transition);
+}
+
+.auth-btn:hover {
+  background: var(--accent);
+  color: #0e1621;
+}
+
+.auth-btn--out {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  padding: 6px 10px;
+  font-size: 16px;
+}
+
+.auth-btn--out:hover {
+  color: var(--red);
+  background: transparent;
+}
+
+.auth-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text);
+  padding: 4px 10px 4px 4px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.auth-user:hover {
+  border-color: var(--accent);
+  background: rgba(102,192,244,0.08);
+}
+
+.auth-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+}
+
+.auth-nome {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* ════════════════════════════════════════
+   PERFIL — Página de perfil
+════════════════════════════════════════ */
+.perfil-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 40vh;
+  color: var(--text-muted);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #2a475e;
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.perfil-nologin {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.perfil-nologin__icon {
+  font-size: 56px;
+  margin-bottom: 16px;
+}
+
+.perfil-nologin h2 {
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.perfil-nologin p {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+.perfil-nologin .btn--lg {
+  display: inline-flex;
+  width: auto;
+  gap: 8px;
+}
+
+/* Card do usuário */
+.perfil-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: var(--bg-section);
+  border-radius: 12px;
+  padding: 28px;
+  border: 1px solid #2a475e;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.perfil-foto {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.perfil-info {
+  flex: 1;
+  min-width: 180px;
+}
+
+.perfil-nome {
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.perfil-email {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.perfil-desde {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.perfil-stats {
+  display: flex;
+  gap: 24px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat__num {
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.stat__label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Tabs */
+.perfil-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid #2a475e;
+  margin-bottom: 24px;
+}
+
+.perfil-tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: -1px;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.perfil-tab:hover {
+  color: var(--text);
+}
+
+.perfil-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.perfil-empty {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+/* ════════════════════════════════════════
+   TOAST — Notificação de ação
+════════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #1e3448;
+  border: 1px solid var(--accent);
+  color: var(--text);
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 14px;
+  z-index: 999;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 640px) {
+  .auth-nome   { display: none; }
+  .perfil-card { flex-direction: column; text-align: center; }
+  .perfil-stats { justify-content: center; }
+}

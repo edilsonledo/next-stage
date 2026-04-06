@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Perfil — Next Stage</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <a href="../index.html" class="header__logo">Next Stage</a>
+  <nav class="nav" id="mainNav">
+    <ul class="nav__list">
+      <li><a class="nav__link" href="../index.html">Inicio</a></li>
+      <li><a class="nav__link" href="quiz.html">Encontrar Jogo</a></li>
+      <li><a class="nav__link" href="catalogo.html">Catalogo</a></li>
+    </ul>
+  </nav>
+  <div id="auth-area" class="auth-area"></div>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main class="container">
+
+  <!-- Estado: carregando -->
+  <div id="perfil-loading" class="perfil-loading">
+    <div class="spinner"></div>
+    <p>Carregando perfil...</p>
+  </div>
+
+  <!-- Estado: não logado -->
+  <div id="perfil-nologin" class="perfil-nologin hidden">
+    <div class="perfil-nologin__icon">🔒</div>
+    <h2>Voce precisa estar logado</h2>
+    <p>Entre com sua conta Google para ver seu perfil e salvar jogos.</p>
+    <button class="btn btn--lg" id="btn-login-perfil">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" width="20">
+      Entrar com Google
+    </button>
+  </div>
+
+  <!-- Estado: logado -->
+  <div id="perfil-content" class="hidden">
+
+    <!-- Card do usuário -->
+    <div class="perfil-card">
+      <img id="perfil-foto" src="" alt="Foto de perfil" class="perfil-foto">
+      <div class="perfil-info">
+        <h1 id="perfil-nome" class="perfil-nome"></h1>
+        <p id="perfil-email" class="perfil-email"></p>
+        <p id="perfil-desde" class="perfil-desde"></p>
+      </div>
+      <div class="perfil-stats">
+        <div class="stat">
+          <span class="stat__num" id="stat-salvos">0</span>
+          <span class="stat__label">Salvos</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" id="stat-jogados">0</span>
+          <span class="stat__label">Jogados</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="perfil-tabs">
+      <button class="perfil-tab active" data-tab="salvos">🔖 Jogos Salvos</button>
+      <button class="perfil-tab" data-tab="jogados">✅ Jogados</button>
+    </div>
+
+    <!-- Lista: salvos -->
+    <div id="tab-salvos" class="tab-content active">
+      <div id="lista-salvos" class="grid"></div>
+    </div>
+
+    <!-- Lista: jogados -->
+    <div id="tab-jogados" class="tab-content">
+      <div id="lista-jogados" class="grid"></div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  &copy; 2026 Next Stage &nbsp;&middot;&nbsp; Feito para quem termina jogos
+</footer>
+
+<script type="module" src="../js/perfil.js"></script>
+</body>
+</html>

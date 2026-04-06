@@ -1,4 +1,6 @@
 import { imgTag, abrirSteam, initHamburger, marcarNavAtivo } from "./utils.js";
+import { initAuthHeader } from "./authHeader.js";
+import { onUsuarioMudou, salvarJogo, marcarJogado } from "./auth.js";
 window.abrirSteam = abrirSteam;
 
 const CATALOGO = [
@@ -63,6 +65,12 @@ function renderCatalogo() {
         </div>
         <p class="card__meta">${j.motivo}</p>
         <button class="btn" onclick="abrirSteam(${j.appid})">Ver na Steam</button>
+        <div class="card-actions" style="display:flex;gap:6px;margin-top:6px">
+          <button class="btn btn--outline btn--icon" title="Salvar jogo"
+            onclick='salvarJogoHandler(${JSON.stringify(j)})'>🔖 Salvar</button>
+          <button class="btn btn--outline btn--icon" title="Marcar como jogado"
+            onclick='jogadoHandler(${JSON.stringify(j)})'>✅ Jogado</button>
+        </div>
       </div>
     </div>
   `).join("");
@@ -98,7 +106,47 @@ document.getElementById("search-input").addEventListener("keyup", e => {
   }
 });
 
+// ── Auth handlers para os cards ──
+let usuarioLogado = null;
+onUsuarioMudou(u => { usuarioLogado = u; });
+
+function precisaLogin(acao) {
+  if (!usuarioLogado) {
+    if (confirm("Voce precisa estar logado para " + acao + ".\nEntrar agora?")) {
+      window.location.href = "perfil.html";
+    }
+    return true;
+  }
+  return false;
+}
+
+window.salvarJogoHandler = async (jogo) => {
+  if (precisaLogin("salvar jogos")) return;
+  await salvarJogo(usuarioLogado.uid, jogo);
+  mostrarToast("🔖 " + jogo.nome + " salvo no seu perfil!");
+};
+
+window.jogadoHandler = async (jogo) => {
+  if (precisaLogin("marcar jogos")) return;
+  await marcarJogado(usuarioLogado.uid, jogo);
+  mostrarToast("✅ " + jogo.nome + " marcado como jogado!");
+};
+
+function mostrarToast(msg) {
+  let toast = document.getElementById("toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast";
+    toast.className = "toast";
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3000);
+}
+
 initHamburger();
+initAuthHeader();
 marcarNavAtivo();
 renderFiltros();
 renderCatalogo();
