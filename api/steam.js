@@ -1,9 +1,9 @@
 // Vercel Serverless Function — Next Stage
-// Faz o proxy seguro para a Steam Web API
+// Proxy seguro para a Steam Web API
 // A STEAM_API_KEY fica em variável de ambiente na Vercel (nunca exposta ao browser)
 
-export default async function handler(req, res) {
-  // Permite CORS do GitHub Pages e localhost
+module.exports = async function handler(req, res) {
+  // CORS — permite acesso do GitHub Pages e localhost
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
       const data = await resp.json();
 
       if (data?.response?.success !== 1) {
-        return res.status(404).json({ error: "Perfil não encontrado." });
+        return res.status(404).json({ error: "Perfil não encontrado. Verifique o nome ou use a URL completa." });
       }
       return res.status(200).json({ steamid: data.response.steamid });
     }
@@ -43,24 +43,29 @@ export default async function handler(req, res) {
       const data = await resp.json();
 
       const games = data?.response?.games;
+
       if (data?.response?.game_count === 0 || (data?.response && !games)) {
         return res.status(403).json({
-          error: "Biblioteca privada ou vazia. Configure seu perfil Steam como público.",
+          error: "Biblioteca privada ou vazia. Vá em Steam → Configurações → Privacidade → Perfil do jogo = Público.",
         });
       }
       if (!games) {
-        return res.status(502).json({ error: "Resposta inválida da Steam API." });
+        return res.status(502).json({ error: "Resposta inválida da Steam API. Tente novamente." });
       }
 
-      // Ordena por horas jogadas e retorna
       const sorted = games.sort((a, b) => (b.playtime_forever || 0) - (a.playtime_forever || 0));
       return res.status(200).json({ games: sorted, total: sorted.length });
     }
 
-    return res.status(400).json({ error: "Parâmetro 'action' inválido. Use: resolve-vanity | library" });
+    // ── Rota de health check ──
+    if (action === "ping") {
+      return res.status(200).json({ ok: true, message: "Next Stage API funcionando!" });
+    }
+
+    return res.status(400).json({ error: "Parâmetro 'action' inválido. Use: resolve-vanity | library | ping" });
 
   } catch (e) {
     console.error("[steam api error]", e);
     return res.status(500).json({ error: "Erro interno ao consultar a Steam API." });
   }
-}
+};
