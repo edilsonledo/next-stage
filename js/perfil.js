@@ -4,6 +4,9 @@ import { initAuthHeader } from "./authHeader.js";
 
 window.abrirSteam = abrirSteam;
 
+// URL base do backend Vercel (mesmo repo, deploy separado)
+const API_BASE = "https://next-stage-api.vercel.app/api/steam";
+
 const elLoading  = document.getElementById("perfil-loading");
 const elNoLogin  = document.getElementById("perfil-nologin");
 const elContent  = document.getElementById("perfil-content");
@@ -128,10 +131,10 @@ initTabs();
 initSteam();
 
 // ════════════════════════════════════════
-// BIBLIOTECA STEAM
+// BIBLIOTECA STEAM — via backend Vercel
 // ════════════════════════════════════════
 
-const PER_PAGE     = 24;
+const PER_PAGE      = 24;
 let todosJogosSteam = [];
 let jogosFiltrados  = [];
 let paginaAtual     = 0;
@@ -173,162 +176,57 @@ function parseSteamInput(valor) {
   return null;
 }
 
-// ── Tenta múltiplos proxies CORS em sequência ──
-const PROXIES = [
-  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-  url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-  url => `https://thingproxy.freeboard.io/fetch/${url}`,
-];
-
-async function fetchComProxy(targetUrl) {
-  let ultimoErro;
-
-  for (const montarProxy of PROXIES) {
-    try {
-      const proxyUrl = montarProxy(targetUrl);
-      const resp = await fetch(proxyUrl, { signal: AbortSignal.timeout(10000) });
-      if (!resp.ok) continue;
-
-      // corsproxy.io e thingproxy retornam o body direto
-      // allorigins retorna { contents: "..." }
-      let text;
-      if (proxyUrl.includes("allorigins.win")) {
-        const data = await resp.json();
-        text = data.contents;
-      } else {
-        text = await resp.text();
-      }
-
-      if (!text) continue;
-      if (text.trim().startsWith("<html") || text.trim().startsWith("<!DOCTYPE")) continue;
-
-      return text; // sucesso
-    } catch (e) {
-      ultimoErro = e;
-    }
-  }
-
-  throw ultimoErro || new Error("Todos os proxies falharam.");
-}
-
-// ── Resolve vanity URL → Steam ID64 via perfil XML público ──
-async function resolverVanityUrl(vanity, apiKey) {
-  // Com API Key: usa endpoint oficial
-  if (apiKey) {
-    try {
-      const url = `https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key=${apiKey}&vanityurl=${vanity}`;
-      const text = await fetchComProxy(url);
-      const json = JSON.parse(text);
-      if (json?.response?.success === 1) return json.response.steamid;
-    } catch {}
-  }
-
-  // Sem API Key: tenta perfil XML público
-  try {
-    const text = await fetchComProxy(`https://steamcommunity.com/id/${vanity}/?xml=1`);
-    const xml  = new DOMParser().parseFromString(text, "text/xml");
-    if (!xml.querySelector("parsererror") && !xml.querySelector("error")) {
-      const idEl = xml.querySelector("steamID64");
-      if (idEl) return idEl.textContent.trim();
-    }
-  } catch {}
-
-  return null;
-}
-
-// ── Busca biblioteca de jogos ──
-async function buscarJogos(steamId64, apiKey) {
-  if (!apiKey) {
-    throw new Error(
-      "É necessária uma Steam Web API Key para buscar sua biblioteca.\n" +
-      "Obtenha gratuitamente em: steamcommunity.com/dev/apikey"
-    );
-  }
-
-  const url = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key=${apiKey}&steamid=${steamId64}&include_appinfo=1&include_played_free_games=1&format=json`;
-
-  let text;
-  try {
-    text = await fetchComProxy(url);
-  } catch (e) {
-    throw new Error("Falha ao conectar. Verifique sua conexão e tente novamente.");
-  }
-
-  let json;
-  try {
-    json = JSON.parse(text);
-  } catch {
-    throw new Error("Resposta inválida da Steam. Verifique se sua API Key está correta.");
-  }
-
-  const games = json?.response?.games;
-  if (json?.response?.game_count === 0 || (json?.response && !games)) {
-    throw new Error(
-      "Biblioteca vazia ou perfil privado.\n" +
-      "Certifique-se que seu perfil Steam está público:\n" +
-      "Steam → Configurações → Privacidade → Perfil do jogo = Público"
-    );
-  }
-  if (!games) {
-    throw new Error("API Key inválida ou sem permissão. Verifique a chave e tente novamente.");
-  }
-
-  return games;
+// ── Chama o backend Vercel ──
+async function chamarApi(params) {
+  const query = new URLSearchParams(params).toString();
+  const resp  = await fetch(`${API_BASE}?${query}`);
+  const data  = await resp.json();
+  if (!resp.ok) throw new Error(data.error || `Erro ${resp.status}`);
+  return data;
 }
 
 async function buscarBibliotecaSteam() {
-  const input   = document.getElementById("steam-id-input");
-  const keyInput = document.getElementById("steam-api-key-input");
-  const erroEl  = document.getElementById("steam-form-erro");
-  const btn     = document.getElementById("btn-buscar-steam");
+  const input  = document.getElementById("steam-id-input");
+  const btn    = document.getElementById("btn-buscar-steam");
 
-  erroEl.classList.add("hidden");
-
-  const apiKey = keyInput ? keyInput.value.trim() : "";
+  document.getElementById("steam-form-erro").classList.add("hidden");
 
   const parsed = parseSteamInput(input.value);
   if (!parsed) {
-    mostrarErroSteam("⚠️ Informe uma URL do perfil Steam válida ou um Steam ID de 17 dígitos.");
-    return;
-  }
-  if (!apiKey) {
-    mostrarErroSteam("⚠️ Informe sua Steam Web API Key. Obtenha gratuitamente em steamcommunity.com/dev/apikey");
+    mostrarErroSteam("⚠️ Informe a URL do perfil Steam ou seu Steam ID numérico.");
     return;
   }
 
-  btn.disabled = true;
+  btn.disabled    = true;
   btn.textContent = "Buscando...";
 
   try {
     let steamId64 = parsed.valor;
 
+    // Resolve nome de perfil → ID64 via backend
     if (parsed.tipo === "vanity") {
-      mostrarBtnStatus("Resolvendo perfil...");
-      steamId64 = await resolverVanityUrl(parsed.valor, apiKey);
-      if (!steamId64) {
-        throw new Error(
-          "Perfil não encontrado pelo nome. Tente usar a URL completa do perfil ou o Steam ID numérico.\n" +
-          "Dica: abra o Steam → seu perfil → copie a URL da barra de endereço."
-        );
-      }
+      btn.textContent = "Resolvendo perfil...";
+      const res = await chamarApi({ action: "resolve-vanity", vanity: parsed.valor });
+      steamId64 = res.steamid;
     }
 
-    mostrarBtnStatus("Carregando biblioteca...");
-    const jogos = await buscarJogos(steamId64, apiKey);
+    // Busca biblioteca via backend
+    btn.textContent = "Carregando biblioteca...";
+    const res = await chamarApi({ action: "library", steamid: steamId64 });
 
-    // Salva Steam ID e API Key no Firestore para próxima vez
+    // Salva o Steam ID no Firestore (apenas ID, sem chave)
     if (usuarioAtual) {
-      await salvarSteamId(usuarioAtual.uid, steamId64, apiKey);
+      await salvarSteamId(usuarioAtual.uid, steamId64);
     }
 
-    todosJogosSteam = jogos.sort((a, b) => (b.playtime_forever || 0) - (a.playtime_forever || 0));
+    todosJogosSteam = res.games;
     jogosFiltrados  = [...todosJogosSteam];
     paginaAtual     = 0;
 
     document.getElementById("steam-resultado-nome").textContent = `Steam ID: ${steamId64}`;
-    document.getElementById("steam-resultado-qtd").textContent  = `${jogos.length} jogos`;
+    document.getElementById("steam-resultado-qtd").textContent  = `${res.total} jogos`;
     document.getElementById("steam-lib-info").textContent =
-      `Exibindo ${Math.min(PER_PAGE, jogos.length)} de ${jogos.length} jogos · ordenados por horas jogadas`;
+      `Exibindo ${Math.min(PER_PAGE, res.total)} de ${res.total} jogos · ordenados por horas jogadas`;
 
     renderSteamGrid(true);
     document.getElementById("steam-connect").classList.add("hidden");
@@ -337,7 +235,7 @@ async function buscarBibliotecaSteam() {
   } catch (e) {
     mostrarErroSteam(`⚠️ ${e.message}`);
   } finally {
-    btn.disabled = false;
+    btn.disabled    = false;
     btn.textContent = "Importar biblioteca";
   }
 }
@@ -346,10 +244,6 @@ function mostrarErroSteam(msg) {
   const el = document.getElementById("steam-form-erro");
   el.textContent = msg;
   el.classList.remove("hidden");
-}
-
-function mostrarBtnStatus(msg) {
-  document.getElementById("btn-buscar-steam").textContent = msg;
 }
 
 function renderSteamGrid(reset) {
@@ -383,7 +277,7 @@ function renderSteamGrid(reset) {
           src="https://cdn.cloudflare.steamstatic.com/steam/apps/${jogo.appid}/header.jpg"
           alt="${jogo.name}"
           loading="lazy"
-          onerror="this.src='https://placehold.co/460x215/1b2838/66c0f4?text=${encodeURIComponent(jogo.name.slice(0,20))}'"
+          onerror="this.src='https://placehold.co/460x215/1b2838/66c0f4?text=${encodeURIComponent(jogo.name.slice(0, 20))}'"
         >
       </div>
       <div class="card__body">
@@ -399,6 +293,5 @@ function renderSteamGrid(reset) {
 
   const exibidos = Math.min(inicio + PER_PAGE, total);
   infoEl.textContent = `Exibindo ${exibidos} de ${total} jogos · ordenados por horas jogadas`;
-
   maisDiv.classList.toggle("hidden", exibidos >= total);
 }

@@ -91,33 +91,22 @@
         <div class="steam-connect__icon">🎮</div>
         <h3>Conecte sua biblioteca Steam</h3>
         <p>
-          Para importar sua biblioteca você precisa de uma <strong>Steam Web API Key</strong> (gratuita)
-          e do seu <strong>Steam ID ou URL do perfil</strong>.
+          Informe o <strong>Steam ID</strong> ou a <strong>URL do seu perfil Steam</strong>
+          para importar sua biblioteca. O perfil precisa ser <strong>público</strong>.
         </p>
         <div class="steam-connect__how">
           <span>⚠️ Requisito: perfil público</span>
           Steam → <strong>Configurações → Privacidade → Perfil do jogo = Público</strong>
-          <span style="margin-top:10px;display:block">🔑 Como obter sua API Key (gratuita):</span>
-          1. Acesse <a href="https://steamcommunity.com/dev/apikey" target="_blank" rel="noopener" style="color:var(--accent)">steamcommunity.com/dev/apikey</a><br>
-          2. Faça login e preencha qualquer nome de domínio (ex: <code>localhost</code>)<br>
-          3. Copie a chave gerada e cole abaixo
-          <span style="margin-top:10px;display:block">🔗 Como encontrar seu perfil:</span>
-          Steam → seu nome → "Ver meu perfil" → copie a URL: <code>steamcommunity.com/id/seunome</code>
+          <span style="margin-top:10px;display:block">� Como encontrar sua URL:</span>
+          Steam → seu nome → "Ver meu perfil" → copie a URL da barra:<br>
+          <code>https://steamcommunity.com/id/seunome</code>
         </div>
         <div class="steam-form">
-          <input
-            type="password"
-            id="steam-api-key-input"
-            class="quiz-input"
-            placeholder="🔑 Steam Web API Key (32 caracteres)"
-            autocomplete="off"
-            style="margin-bottom:10px"
-          >
           <input
             type="text"
             id="steam-id-input"
             class="quiz-input"
-            placeholder="🔗 URL do perfil ou Steam ID numérico"
+            placeholder="https://steamcommunity.com/id/seunome  ou  76561198..."
           >
           <button class="btn" id="btn-buscar-steam" style="width:auto;padding:10px 28px">
             Importar biblioteca
