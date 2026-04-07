@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "Backend serverless para o Next Stage — proxy seguro da Steam API",
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   }
 }
