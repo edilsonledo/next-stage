@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elden Ring — Hub | Next Stage</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/elden-ring.css">
+</head>
+<body class="er-body">
+
+<header class="header er-header">
+  <a href="../index.html" class="header__logo">Next Stage</a>
+  <nav class="nav" id="mainNav">
+    <ul class="nav__list">
+      <li><a class="nav__link" href="../index.html">Inicio</a></li>
+      <li><a class="nav__link" href="quiz.html">Encontrar Jogo</a></li>
+      <li><a class="nav__link" href="catalogo.html">Catálogo</a></li>
+    </ul>
+  </nav>
+  <div id="auth-area" class="auth-area"></div>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ── HERO ─────────────────────────────────── -->
+<section class="er-hero">
+  <div class="er-hero__bg"></div>
+  <div class="er-hero__overlay"></div>
+  <div class="er-hero__content container">
+    <a href="perfil.html" class="er-back">← Voltar ao perfil</a>
+    <img
+      src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg"
+      alt="Elden Ring"
+      class="er-hero__capa"
+    >
+    <div class="er-hero__text">
+      <p class="er-hero__label">FromSoftware · 2022</p>
+      <h1 class="er-hero__title">Elden Ring</h1>
+      <p class="er-hero__sub">The Lands Between aguarda. Que o Anel Prateado te guie, Ternished.</p>
+      <div class="er-hero__badges">
+        <span class="er-badge">⚔️ Action RPG</span>
+        <span class="er-badge">🌍 Open World</span>
+        <span class="er-badge">💀 Soulslike</span>
+        <span class="er-badge er-badge--gold">🏆 GOTY 2022</span>
+      </div>
+      <a href="https://store.steampowered.com/app/1245620/" target="_blank" rel="noopener" class="btn er-btn-steam">
+        🎮 Abrir na Steam
+      </a>
+    </div>
+  </div>
+  <div class="er-hero__scroll">↓</div>
+</section>
+
+<!-- ── QUICK LINKS ───────────────────────────── -->
+<div class="er-quicklinks">
+  <div class="container er-quicklinks__inner">
+    <a href="#mapas" class="er-ql">🗺️ Mapas</a>
+    <a href="#builds" class="er-ql">⚔️ Builds</a>
+    <a href="#curiosidades" class="er-ql">💡 Curiosidades</a>
+    <a href="#chefes" class="er-ql">💀 Chefes</a>
+    <a href="#wiki" class="er-ql">📖 Wiki & Lore</a>
+    <a href="#dlc" class="er-ql">🌑 Shadow of the Erdtree</a>
+    <a href="#ferramentas" class="er-ql">🛠️ Ferramentas</a>
+  </div>
+</div>
+
+<main class="container er-main">
+
+  <!-- ── MAPAS ──────────────────────────────── -->
+  <section id="mapas" class="er-section">
+    <div class="er-section__header">
+      <h2 class="er-section__title">🗺️ Mapas Interativos</h2>
+      <p class="er-section__sub">Explore The Lands Between sem perder nenhum segredo</p>
+    </div>
+    <div class="er-cards">
+
+      <a href="https://mapgenie.io/elden-ring/maps/the-lands-between" target="_blank" rel="noopener" class="er-card er-card--featured">
+        <div class="er-card__icon">🗺️</div>
+        <div class="er-card__body">
+          <span class="er-card__tag">Recomendado</span>
+          <h3 class="er-card__title">MapGenie — Elden Ring</h3>
+          <p class="er-card__desc">O mapa mais completo e atualizado. Marque itens encontrados, filtre por tipo (chefes, graças, cavernas, catacumbas, itens raros, cavalo de pedra...). Inclui DLC.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://eldenring.wiki.fextralife.com/Interactive+Map" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">🌐</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">Fextralife Interactive Map</h3>
+          <p class="er-card__desc">Mapa integrado à wiki — clique em qualquer ponto e acessa o artigo completo daquele local ou item.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://www.eldenring-map.com/" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">📍</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">Elden Ring Map (.com)</h3>
+          <p class="er-card__desc">Mapa com foco em localizações de NPCs, questlines e eventos únicos que mudam conforme o progresso.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── BUILDS ─────────────────────────────── -->
+  <section id="builds" class="er-section">
+    <div class="er-section__header">
+      <h2 class="er-section__title">⚔️ Builds & Guias</h2>
+      <p class="er-section__sub">Do iniciante ao jogador de NG+7 — encontre sua build ideal</p>
+    </div>
+
+    <!-- Tipos de build rápidos -->
+    <div class="er-builds-grid">
+      <div class="er-build-type">
+        <span class="er-build-type__icon">🗡️</span>
+        <span class="er-build-type__name">Quality</span>
+        <span class="er-build-type__stat">STR + DEX</span>
+      </div>
+      <div class="er-build-type">
+        <span class="er-build-type__icon">🔥</span>
+        <span class="er-build-type__name">Pyromancer</span>
+        <span class="er-build-type__stat">FTH + STR</span>
+      </div>
+      <div class="er-build-type">
+        <span class="er-build-type__icon">❄️</span>
+        <span class="er-build-type__name">Cold Mage</span>
+        <span class="er-build-type__stat">INT + DEX</span>
+      </div>
+      <div class="er-build-type">
+        <span class="er-build-type__icon">⚡</span>
+        <span class="er-build-type__name">Lightning Spear</span>
+        <span class="er-build-type__stat">FTH 40+</span>
+      </div>
+      <div class="er-build-type">
+        <span class="er-build-type__icon">🩸</span>
+        <span class="er-build-type__name">Bleed</span>
+        <span class="er-build-type__stat">ARC + DEX</span>
+      </div>
+      <div class="er-build-type">
+        <span class="er-build-type__icon">🧙</span>
+        <span class="er-build-type__name">Pure Sorcerer</span>
+        <span class="er-build-type__stat">INT 80</span>
+      </div>
+    </div>
+
+    <div class="er-cards" style="margin-top: 20px">
+
+      <a href="https://eldenring.wiki.fextralife.com/Builds" target="_blank" rel="noopener" class="er-card er-card--featured">
+        <div class="er-card__icon">⚔️</div>
+        <div class="er-card__body">
+          <span class="er-card__tag">Mais completo</span>
+          <h3 class="er-card__title">Fextralife — Builds</h3>
+          <p class="er-card__desc">Centenas de builds testadas pela comunidade, separadas por arquétipo. Inclui builds para PvP, PvE e co-op.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://eldenring.wiki.fextralife.com/Character+Planner" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">📊</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">Character Planner (Fextralife)</h3>
+          <p class="er-card__desc">Calcule seus atributos, dano de armas e AR antes de alocar pontos. Essencial para builds eficientes.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://www.reddit.com/r/EldenRingBuilds/" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">🗣️</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">r/EldenRingBuilds</h3>
+          <p class="er-card__desc">Subreddit dedicado 100% a builds. Poste a sua e receba feedback ou encontre ideias novas.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://www.youtube.com/results?search_query=elden+ring+best+build+2024" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">▶️</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">YouTube — Melhores Builds</h3>
+          <p class="er-card__desc">Guias em vídeo das builds mais poderosas do meta atual, com demonstrações contra chefes.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── CURIOSIDADES ───────────────────────── -->
+  <section id="curiosidades" class="er-section">
+    <div class="er-section__header">
+      <h2 class="er-section__title">💡 Curiosidades</h2>
+      <p class="er-section__sub">O que acontece nos bastidores e dentro do lore de Elden Ring</p>
+    </div>
+    <div class="er-curiosidades">
+
+      <div class="er-curiosidade">
+        <div class="er-curiosidade__num">01</div>
+        <div class="er-curiosidade__body">
+          <h4>George R.R. Martin escreveu a mitologia</h4>
+          <p>O autor de Game of Thrones criou toda a história anterior ao jogo — os Ancestrais, os Semideuses, a Guerra das Estrelas. Miyazaki disse que a colaboração foi única: Martin entregou o mundo, FromSoftware entregou o jogo.</p>
+        </div>
+      </div>
+
+      <div class="er-curiosidade">
+        <div class="er-curiosidade__num">02</div>
+        <div class="er-curiosidade__body">
+          <h4>Malenia NUNCA foi derrotada — em lore</h4>
+          <p>Malenia, Blade of Miquella, sofre da Podridão Escarlate desde o nascimento mas nunca sucumbiu a ela. Em combate, ela nunca perdeu para ninguém no lore do jogo. Os jogadores são a primeira exceção.</p>
+        </div>
+      </div>
+
+      <div class="er-curiosidade">
+        <div class="er-curiosidade__num">03</div>
+        <div class="er-curiosidade__body">
+          <h4>"Let Me Solo Her" virou lenda real</h4>
+          <p>Um jogador nu, com capacete de panela e dual Katanas, passou semanas ajudando outros jogadores a derrotar Malenia. Ficou tão famoso que a Bandai Namco enviou uma espada real comemorativa para ele.</p>
+        </div>
+      </div>
+
+      <div class="er-curiosidade">
+        <div class="er-curiosidade__num">04</div>
+        <div class="er-curiosidade__body">
+          <h4>3 anos de silêncio absoluto após o anúncio</h4>
+          <p>Elden Ring foi anunciado na E3 2019 com um trailer misterioso. Depois disso, a FromSoftware e a Bandai ficaram completamente em silêncio por mais de 2 anos. A comunidade chamou o período de "The Great Silence".</p>
+        </div>
+      </div>
+
+      <div class="er-curiosidade">
+        <div class="er-curiosidade__num">05</div>
+        <div class="er-curiosidade__body">
+          <h4>O primeiro mundo aberto da FromSoftware</h4>
+          <p>Nenhum jogo anterior da FromSoftware tinha um mapa completamente aberto. Miyazaki disse que queria que o jogador descobrisse áreas escondidas atrás de cachoeiras, em cavernas e em locais que não aparecem no mapa.</p>
+        </div>
+      </div>
+
+      <div class="er-curiosidade">
+        <div class="er-curiosidade__num">06</div>
+        <div class="er-curiosidade__body">
+          <h4>O Erdtree tem raízes que controlam a morte</h4>
+          <p>A Grande Árvore Dourada é a fonte da Graça — e através dela, os Tarnished (jogadores) renascem. O lore sugere que o Erdtree controla o ciclo de morte e renascimento de toda a civilização das Terras do Meio.</p>
+        </div>
+      </div>
+
+      <div class="er-curiosidade">
+        <div class="er-curiosidade__num">07</div>
+        <div class="er-curiosidade__body">
+          <h4>Ranni planejou tudo desde o início</h4>
+          <p>A questline de Ranni é considerada o verdadeiro final "canônico". Ela matou a própria alma ainda criança para escapar do destino imposto pelo Outer God. Toda a história foi orquestrada por ela ao longo de séculos.</p>
+        </div>
+      </div>
+
+      <div class="er-curiosidade">
+        <div class="er-curiosidade__num">08</div>
+        <div class="er-curiosidade__body">
+          <h4>20 milhões de cópias em menos de 1 ano</h4>
+          <p>Elden Ring tornou-se o Soulslike mais vendido de todos os tempos. Foi o jogo mais jogado no Steam por semanas e ganhou o GOTY em praticamente todas as premiações de 2022.</p>
+        </div>
+      </div>
+
+      <div class="er-curiosidade">
+        <div class="er-curiosidade__num">09</div>
+        <div class="er-curiosidade__body">
+          <h4>Shadow of the Erdtree — um DLC gigante</h4>
+          <p>Lançado em junho de 2024, a expansão é maior do que muitos jogos completos. Tem um mapa próprio (Shadow Realm), novos chefes, armas e lore que expande a história de Miquella, o mais poderoso dos Semideuses.</p>
+        </div>
+      </div>
+
+      <div class="er-curiosidade">
+        <div class="er-curiosidade__num">10</div>
+        <div class="er-curiosidade__body">
+          <h4>Starscourge Radahn segurou as estrelas</h4>
+          <p>Radahn aprendeu gravitomância especificamente para segurar as estrelas do céu — não para usar como arma, mas para impedir que uma estrela específica caísse. Essa estrela era o destino de Ranni.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CHEFES MAIS DIFÍCEIS ───────────────── -->
+  <section id="chefes" class="er-section">
+    <div class="er-section__header">
+      <h2 class="er-section__title">💀 Chefes Marcantes</h2>
+      <p class="er-section__sub">Os encontros que definem a experiência de Elden Ring</p>
+    </div>
+    <div class="er-chefes">
+
+      <div class="er-chefe">
+        <div class="er-chefe__rank" style="--rank-color: #d4af37">S</div>
+        <div class="er-chefe__info">
+          <h4 class="er-chefe__nome">Malenia, Blade of Miquella</h4>
+          <p class="er-chefe__local">📍 Elphael, Brace of the Haligtree</p>
+          <p class="er-chefe__desc">A luta mais icônica do jogo. Heal-on-hit, Scarlet Rot e Waterfowl Dance — a dança que matou mais jogadores do que qualquer outro ataque na história dos Soulslike.</p>
+          <a href="https://eldenring.wiki.fextralife.com/Malenia+Blade+of+Miquella" target="_blank" rel="noopener" class="er-chefe__link">Ver na Wiki →</a>
+        </div>
+      </div>
+
+      <div class="er-chefe">
+        <div class="er-chefe__rank" style="--rank-color: #d4af37">S</div>
+        <div class="er-chefe__info">
+          <h4 class="er-chefe__nome">Starscourge Radahn</h4>
+          <p class="er-chefe__local">📍 Caelid — Redmane Castle (Festival)</p>
+          <p class="er-chefe__desc">A batalha épica no deserto de Caelid com chuva de meteoros e companheiros convocáveis. Lore poderoso e design único.</p>
+          <a href="https://eldenring.wiki.fextralife.com/Starscourge+Radahn" target="_blank" rel="noopener" class="er-chefe__link">Ver na Wiki →</a>
+        </div>
+      </div>
+
+      <div class="er-chefe">
+        <div class="er-chefe__rank" style="--rank-color: #c0c0c0">A</div>
+        <div class="er-chefe__info">
+          <h4 class="er-chefe__nome">Maliketh, the Black Blade</h4>
+          <p class="er-chefe__local">📍 Crumbling Farum Azula</p>
+          <p class="er-chefe__desc">Dois fases: a primeira com Beast Clergyman (intensa), a segunda com Maliketh em velocidade sobrenatural. Uma das melhores animações do jogo.</p>
+          <a href="https://eldenring.wiki.fextralife.com/Maliketh+the+Black+Blade" target="_blank" rel="noopener" class="er-chefe__link">Ver na Wiki →</a>
+        </div>
+      </div>
+
+      <div class="er-chefe">
+        <div class="er-chefe__rank" style="--rank-color: #c0c0c0">A</div>
+        <div class="er-chefe__info">
+          <h4 class="er-chefe__nome">Morgott, the Omen King</h4>
+          <p class="er-chefe__local">📍 Leyndell, Royal Capital</p>
+          <p class="er-chefe__desc">"Fools... Heed my words..." — Morgott guarda a Capital com honra apesar de ter sido amaldiçoado e rejeitado pela própria família. Um dos melhores lores do jogo.</p>
+          <a href="https://eldenring.wiki.fextralife.com/Morgott+the+Omen+King" target="_blank" rel="noopener" class="er-chefe__link">Ver na Wiki →</a>
+        </div>
+      </div>
+
+      <div class="er-chefe">
+        <div class="er-chefe__rank" style="--rank-color: #cd7f32">B</div>
+        <div class="er-chefe__info">
+          <h4 class="er-chefe__nome">Radagon of the Golden Order + Elden Beast</h4>
+          <p class="er-chefe__local">📍 Elden Throne — Final do jogo</p>
+          <p class="er-chefe__desc">O chefe final duplo. Radagon é intenso e rápido. Elden Beast é épico visualmente — você literalmente luta contra um ser cósmico dentro do Elden Ring.</p>
+          <a href="https://eldenring.wiki.fextralife.com/Radagon+of+the+Golden+Order" target="_blank" rel="noopener" class="er-chefe__link">Ver na Wiki →</a>
+        </div>
+      </div>
+
+      <div class="er-chefe">
+        <div class="er-chefe__rank" style="--rank-color: #cd7f32">B</div>
+        <div class="er-chefe__info">
+          <h4 class="er-chefe__nome">Mohg, Lord of Blood</h4>
+          <p class="er-chefe__local">📍 Mohgwyn Palace (área secreta)</p>
+          <p class="er-chefe__desc">Uma das localizações mais secretas do jogo. Mohg usa magia de sangue e tem um ritual na fase 2 que mata o jogador instantaneamente se não souber como evitar.</p>
+          <a href="https://eldenring.wiki.fextralife.com/Mohg+Lord+of+Blood" target="_blank" rel="noopener" class="er-chefe__link">Ver na Wiki →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── WIKI & LORE ────────────────────────── -->
+  <section id="wiki" class="er-section">
+    <div class="er-section__header">
+      <h2 class="er-section__title">📖 Wiki & Lore</h2>
+      <p class="er-section__sub">Tudo sobre itens, personagens, regiões e a história profunda</p>
+    </div>
+    <div class="er-cards">
+
+      <a href="https://eldenring.wiki.fextralife.com/" target="_blank" rel="noopener" class="er-card er-card--featured">
+        <div class="er-card__icon">📖</div>
+        <div class="er-card__body">
+          <span class="er-card__tag">Mais completa</span>
+          <h3 class="er-card__title">Fextralife Wiki</h3>
+          <p class="er-card__desc">A referência principal — itens, armas, feitiços, NPCs, localizações, chefes, lore. Atualizada com o DLC.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://eldenring.fandom.com/wiki/Elden_Ring_Wiki" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">🌐</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">Fandom Wiki — Elden Ring</h3>
+          <p class="er-card__desc">Ótima para lore profundo — análises de itens, teorias de personagens e conexões com Dark Souls.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://www.youtube.com/@VaatiVidya" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">▶️</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">Vaati Vidya (YouTube)</h3>
+          <p class="er-card__desc">O canal mais famoso de lore Soulsborne. Vídeos com análise profunda de personagens, localidades e teorias.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://www.youtube.com/results?search_query=elden+ring+lore+explicado+portugues" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">🇧🇷</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">Lore em Português (YouTube)</h3>
+          <p class="er-card__desc">Canais brasileiros explicando toda a mitologia das Terras do Meio em detalhes.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── DLC ────────────────────────────────── -->
+  <section id="dlc" class="er-section er-section--dlc">
+    <div class="er-dlc__banner">
+      <div class="er-dlc__content">
+        <p class="er-dlc__label">DLC — Junho 2024</p>
+        <h2 class="er-dlc__title">Shadow of the Erdtree</h2>
+        <p class="er-dlc__desc">
+          Uma expansão do tamanho de um jogo completo ambientada no Shadow Realm — o mundo paralelo onde Miquella aguarda.
+          Novos chefes, armas, feitiços, localizações e o lore mais impactante da franquia.
+        </p>
+        <div class="er-dlc__links">
+          <a href="https://eldenring.wiki.fextralife.com/Shadow+of+the+Erdtree+DLC" target="_blank" rel="noopener" class="btn er-btn-steam">📖 Wiki do DLC</a>
+          <a href="https://mapgenie.io/elden-ring/maps/shadow-realm" target="_blank" rel="noopener" class="er-btn-outline">🗺️ Mapa do DLC</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="er-cards" style="margin-top: 24px">
+
+      <a href="https://eldenring.wiki.fextralife.com/Messmer+the+Impaler" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">🔥</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">Messmer the Impaler</h3>
+          <p class="er-card__desc">O vilão principal do DLC — filho de Marika escondido do mundo. Uma das lutas mais intensas e visualmente espetaculares do jogo.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://eldenring.wiki.fextralife.com/Promised+Consort+Radahn" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">💀</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">Promised Consort Radahn</h3>
+          <p class="er-card__desc">O chefe final do DLC. Fase 2 com Miquella mudou o meta do jogo — considerada um dos fights mais difíceis da FromSoftware.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://eldenring.wiki.fextralife.com/Shadow+of+the+Erdtree+DLC#Scadutree+Fragments" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">🌳</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">Scadutree Fragments — Guia</h3>
+          <p class="er-card__desc">O sistema de nivelamento do DLC. Colete fragmentos para aumentar dano e defesa no Shadow Realm. Essencial para sobreviver.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── FERRAMENTAS ────────────────────────── -->
+  <section id="ferramentas" class="er-section">
+    <div class="er-section__header">
+      <h2 class="er-section__title">🛠️ Ferramentas & Comunidade</h2>
+      <p class="er-section__sub">Mods, fixes, estatísticas e onde encontrar outros jogadores</p>
+    </div>
+    <div class="er-cards">
+
+      <a href="https://www.nexusmods.com/eldenring" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">🔧</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">Nexus Mods — Elden Ring</h3>
+          <p class="er-card__desc">Mods de qualidade de vida, visuais, câmera, HUD e muito mais. Compatíveis com jogo offline.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://www.pcgamingwiki.com/wiki/Elden_Ring" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">💻</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">PCGamingWiki</h3>
+          <p class="er-card__desc">Configurações gráficas, fixes de crash, como ativar HDR e otimizações para rodar bem no seu PC.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://www.steamdb.info/app/1245620/" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">📊</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">SteamDB — Elden Ring</h3>
+          <p class="er-card__desc">Pico de jogadores, histórico de preços, DLCs disponíveis e todas as conquistas com taxa de desbloqueio.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://www.reddit.com/r/Eldenring/" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">🗣️</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">r/Eldenring</h3>
+          <p class="er-card__desc">Subreddit oficial com 3M+ membros — perguntas, memes, conquistas, co-op e discussões de lore.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://discord.com/invite/eldenring" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">💬</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">Discord Oficial</h3>
+          <p class="er-card__desc">Servidor oficial para co-op, PvP, builds e discussões ao vivo com a comunidade global.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+      <a href="https://store.steampowered.com/app/1245620/Elden_Ring/#app_reviews_hash" target="_blank" rel="noopener" class="er-card">
+        <div class="er-card__icon">⭐</div>
+        <div class="er-card__body">
+          <h3 class="er-card__title">Reviews na Steam</h3>
+          <p class="er-card__desc">"Overwhelmingly Positive" com mais de 700.000 reviews. Leia o que a comunidade diz sobre o jogo.</p>
+        </div>
+        <span class="er-card__arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  &copy; 2026 Next Stage &nbsp;&middot;&nbsp; Hub de Elden Ring — Que a Graça te guie
+</footer>
+
+<script type="module" src="../js/authHeader.js"></script>
+<script type="module">
+  import { onUsuarioMudou } from "../js/auth.js";
+  import { renderAuthArea } from "../js/authHeader.js";
+  import { initHamburger } from "../js/utils.js";
+  initHamburger();
+  onUsuarioMudou(user => renderAuthArea(user, document.getElementById("auth-area")));
+</script>
+
+</body>
+</html>
