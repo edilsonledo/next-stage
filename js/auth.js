@@ -110,5 +110,10 @@ export async function marcarJogado(uid, jogo) {
   });
 }
 
+// ── Salvar Steam ID do usuário ──
+export async function salvarSteamId(uid, steamId) {
+  await updateDoc(doc(db, "usuarios", uid), { steamId });
+}
+
 // ── Exporta instâncias para uso avançado ──
 export { auth, db };

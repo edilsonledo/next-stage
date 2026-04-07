@@ -68,8 +68,9 @@
 
     <!-- Tabs -->
     <div class="perfil-tabs">
-      <button class="perfil-tab active" data-tab="salvos">🔖 Jogos Salvos</button>
+      <button class="perfil-tab active" data-tab="salvos">🔖 Salvos</button>
       <button class="perfil-tab" data-tab="jogados">✅ Jogados</button>
+      <button class="perfil-tab" data-tab="steam">🎮 Biblioteca Steam</button>
     </div>
 
     <!-- Lista: salvos -->
@@ -80,6 +81,60 @@
     <!-- Lista: jogados -->
     <div id="tab-jogados" class="tab-content">
       <div id="lista-jogados" class="grid"></div>
+    </div>
+
+    <!-- Biblioteca Steam -->
+    <div id="tab-steam" class="tab-content">
+
+      <!-- Formulário de conexão -->
+      <div id="steam-connect" class="steam-connect">
+        <div class="steam-connect__icon">🎮</div>
+        <h3>Conecte sua biblioteca Steam</h3>
+        <p>
+          Informe seu <strong>Steam ID</strong> ou a <strong>URL do seu perfil Steam</strong>
+          para importar sua biblioteca. O perfil precisa ser <strong>público</strong>.
+        </p>
+        <div class="steam-connect__how">
+          <span>Como encontrar:</span>
+          Abra o Steam → clique no seu nome → "Ver meu perfil" → copie a URL (ex: <code>https://steamcommunity.com/id/seunome</code>) ou o número do ID de 17 dígitos.
+        </div>
+        <div class="steam-form">
+          <input
+            type="text"
+            id="steam-id-input"
+            class="quiz-input"
+            placeholder="https://steamcommunity.com/id/seunome  ou  76561198..."
+          >
+          <button class="btn" id="btn-buscar-steam" style="width:auto;padding:10px 28px">
+            Importar biblioteca
+          </button>
+        </div>
+        <p id="steam-form-erro" class="steam-erro hidden"></p>
+      </div>
+
+      <!-- Resultado -->
+      <div id="steam-resultado" class="hidden">
+        <div class="steam-resultado__header">
+          <div>
+            <span id="steam-resultado-nome" class="steam-resultado__nome"></span>
+            <span id="steam-resultado-qtd" class="steam-resultado__qtd"></span>
+          </div>
+          <button class="btn btn--outline" id="btn-trocar-steam" style="width:auto;padding:6px 16px;font-size:13px">
+            Trocar conta
+          </button>
+        </div>
+        <div class="search-bar" style="margin-bottom:16px">
+          <input type="text" id="steam-search" placeholder="Buscar jogo na biblioteca..." />
+        </div>
+        <p id="steam-lib-info" style="font-size:13px;color:var(--text-muted);margin-bottom:12px"></p>
+        <div id="steam-grid" class="grid"></div>
+        <div id="steam-load-mais" class="steam-load-mais hidden">
+          <button class="btn btn--outline" id="btn-mais-steam" style="width:auto;padding:10px 32px">
+            Carregar mais jogos
+          </button>
+        </div>
+      </div>
+
     </div>
 
   </div>

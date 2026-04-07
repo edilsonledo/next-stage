@@ -1106,3 +1106,124 @@
   .perfil-card { flex-direction: column; text-align: center; }
   .perfil-stats { justify-content: center; }
 }
+
+/* ════════════════════════════════════════
+   STEAM — Biblioteca Steam no perfil
+════════════════════════════════════════ */
+.steam-connect {
+  text-align: center;
+  padding: 40px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.steam-connect__icon {
+  font-size: 52px;
+  margin-bottom: 16px;
+}
+
+.steam-connect h3 {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.steam-connect p {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.steam-connect__how {
+  background: rgba(102,192,244,0.06);
+  border: 1px solid rgba(102,192,244,0.2);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.steam-connect__how span {
+  display: block;
+  font-weight: bold;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.steam-connect__how code {
+  background: rgba(0,0,0,0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.steam-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.steam-form .quiz-input {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 0;
+}
+
+.steam-erro {
+  color: #e06c6c;
+  font-size: 13px;
+  margin-top: 10px;
+  background: rgba(224,108,108,0.08);
+  border: 1px solid rgba(224,108,108,0.2);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+}
+
+.steam-resultado__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #2a475e;
+}
+
+.steam-resultado__nome {
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.steam-resultado__qtd {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 13px;
+  color: var(--accent);
+  background: rgba(102,192,244,0.1);
+  border: 1px solid rgba(102,192,244,0.25);
+  border-radius: 20px;
+  padding: 2px 10px;
+}
+
+.steam-horas {
+  background: rgba(164,208,7,0.1);
+  color: var(--accent2);
+  border: 1px solid rgba(164,208,7,0.2);
+}
+
+.steam-load-mais {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  padding-bottom: 12px;
+}
+
