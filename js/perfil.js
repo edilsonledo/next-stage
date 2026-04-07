@@ -97,9 +97,13 @@ async function carregarPerfil(user) {
   renderLista("lista-salvos",  salvos,  "salvos");
   renderLista("lista-jogados", jogados, "jogados");
 
-  // Se já tiver Steam ID salvo, preenche o campo automaticamente
+  // Se já tiver Steam ID salvo, preenche os campos automaticamente
   if (perfil?.steamId) {
     document.getElementById("steam-id-input").value = perfil.steamId;
+  }
+  if (perfil?.steamApiKey) {
+    const keyEl = document.getElementById("steam-api-key-input");
+    if (keyEl) keyEl.value = perfil.steamApiKey;
   }
 
   mostrar(elContent);
@@ -169,79 +173,126 @@ function parseSteamInput(valor) {
   return null;
 }
 
-// ── Fetch via proxy allorigins com tratamento de erro ──
-async function fetchProxy(url) {
-  const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
-  const resp = await fetch(proxyUrl);
-  if (!resp.ok) throw new Error(`Falha na requisição (HTTP ${resp.status})`);
-  const data = await resp.json();
-  if (!data.contents) throw new Error("Proxy não retornou conteúdo.");
-  // Verifica se o proxy retornou HTML em vez de JSON/XML
-  if (data.contents.trim().startsWith("<html") || data.contents.trim().startsWith("<!DOCTYPE")) {
-    throw new Error("RETORNO_HTML");
+// ── Tenta múltiplos proxies CORS em sequência ──
+const PROXIES = [
+  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+  url => `https://thingproxy.freeboard.io/fetch/${url}`,
+];
+
+async function fetchComProxy(targetUrl) {
+  let ultimoErro;
+
+  for (const montarProxy of PROXIES) {
+    try {
+      const proxyUrl = montarProxy(targetUrl);
+      const resp = await fetch(proxyUrl, { signal: AbortSignal.timeout(10000) });
+      if (!resp.ok) continue;
+
+      // corsproxy.io e thingproxy retornam o body direto
+      // allorigins retorna { contents: "..." }
+      let text;
+      if (proxyUrl.includes("allorigins.win")) {
+        const data = await resp.json();
+        text = data.contents;
+      } else {
+        text = await resp.text();
+      }
+
+      if (!text) continue;
+      if (text.trim().startsWith("<html") || text.trim().startsWith("<!DOCTYPE")) continue;
+
+      return text; // sucesso
+    } catch (e) {
+      ultimoErro = e;
+    }
   }
-  return data.contents;
+
+  throw ultimoErro || new Error("Todos os proxies falharam.");
 }
 
 // ── Resolve vanity URL → Steam ID64 via perfil XML público ──
-async function resolverVanityUrl(vanity) {
-  const xmlStr = await fetchProxy(`https://steamcommunity.com/id/${vanity}/?xml=1`);
-  const xml = new DOMParser().parseFromString(xmlStr, "text/xml");
-  // Verifica erro de XML
-  if (xml.querySelector("parsererror") || xml.querySelector("error")) {
-    return null;
+async function resolverVanityUrl(vanity, apiKey) {
+  // Com API Key: usa endpoint oficial
+  if (apiKey) {
+    try {
+      const url = `https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key=${apiKey}&vanityurl=${vanity}`;
+      const text = await fetchComProxy(url);
+      const json = JSON.parse(text);
+      if (json?.response?.success === 1) return json.response.steamid;
+    } catch {}
   }
-  const idEl = xml.querySelector("steamID64");
-  return idEl ? idEl.textContent.trim() : null;
+
+  // Sem API Key: tenta perfil XML público
+  try {
+    const text = await fetchComProxy(`https://steamcommunity.com/id/${vanity}/?xml=1`);
+    const xml  = new DOMParser().parseFromString(text, "text/xml");
+    if (!xml.querySelector("parsererror") && !xml.querySelector("error")) {
+      const idEl = xml.querySelector("steamID64");
+      if (idEl) return idEl.textContent.trim();
+    }
+  } catch {}
+
+  return null;
 }
 
-// ── Busca biblioteca via API pública (requer perfil público) ──
-async function buscarJogos(steamId64) {
-  // Tenta API Steam sem chave (funciona apenas se perfil for público e sem restrição CORS)
-  const url = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?steamid=${steamId64}&include_appinfo=1&include_played_free_games=1&format=json&key=`;
-  let contents;
+// ── Busca biblioteca de jogos ──
+async function buscarJogos(steamId64, apiKey) {
+  if (!apiKey) {
+    throw new Error(
+      "É necessária uma Steam Web API Key para buscar sua biblioteca.\n" +
+      "Obtenha gratuitamente em: steamcommunity.com/dev/apikey"
+    );
+  }
+
+  const url = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key=${apiKey}&steamid=${steamId64}&include_appinfo=1&include_played_free_games=1&format=json`;
+
+  let text;
   try {
-    contents = await fetchProxy(url);
+    text = await fetchComProxy(url);
   } catch (e) {
-    if (e.message === "RETORNO_HTML") {
-      throw new Error(
-        "A Steam bloqueou a requisição. Isso acontece quando o perfil é privado ou a Steam exige uma API Key. " +
-        "Verifique se seu perfil Steam está público (Configurações → Privacidade → Perfil do jogo = Público)."
-      );
-    }
-    throw e;
+    throw new Error("Falha ao conectar. Verifique sua conexão e tente novamente.");
   }
 
   let json;
   try {
-    json = JSON.parse(contents);
+    json = JSON.parse(text);
   } catch {
-    throw new Error(
-      "Resposta inesperada da Steam. Certifique-se que seu perfil está público e tente novamente."
-    );
+    throw new Error("Resposta inválida da Steam. Verifique se sua API Key está correta.");
   }
 
   const games = json?.response?.games;
-  if (!games) {
-    // response vazio = perfil privado ou sem jogos
+  if (json?.response?.game_count === 0 || (json?.response && !games)) {
     throw new Error(
-      "Biblioteca não encontrada. Verifique se seu perfil Steam está público:\n" +
+      "Biblioteca vazia ou perfil privado.\n" +
+      "Certifique-se que seu perfil Steam está público:\n" +
       "Steam → Configurações → Privacidade → Perfil do jogo = Público"
     );
   }
+  if (!games) {
+    throw new Error("API Key inválida ou sem permissão. Verifique a chave e tente novamente.");
+  }
+
   return games;
 }
 
 async function buscarBibliotecaSteam() {
-  const input  = document.getElementById("steam-id-input");
-  const erroEl = document.getElementById("steam-form-erro");
-  const btn    = document.getElementById("btn-buscar-steam");
+  const input   = document.getElementById("steam-id-input");
+  const keyInput = document.getElementById("steam-api-key-input");
+  const erroEl  = document.getElementById("steam-form-erro");
+  const btn     = document.getElementById("btn-buscar-steam");
 
   erroEl.classList.add("hidden");
+
+  const apiKey = keyInput ? keyInput.value.trim() : "";
 
   const parsed = parseSteamInput(input.value);
   if (!parsed) {
     mostrarErroSteam("⚠️ Informe uma URL do perfil Steam válida ou um Steam ID de 17 dígitos.");
+    return;
+  }
+  if (!apiKey) {
+    mostrarErroSteam("⚠️ Informe sua Steam Web API Key. Obtenha gratuitamente em steamcommunity.com/dev/apikey");
     return;
   }
 
@@ -253,7 +304,7 @@ async function buscarBibliotecaSteam() {
 
     if (parsed.tipo === "vanity") {
       mostrarBtnStatus("Resolvendo perfil...");
-      steamId64 = await resolverVanityUrl(parsed.valor);
+      steamId64 = await resolverVanityUrl(parsed.valor, apiKey);
       if (!steamId64) {
         throw new Error(
           "Perfil não encontrado pelo nome. Tente usar a URL completa do perfil ou o Steam ID numérico.\n" +
@@ -263,11 +314,11 @@ async function buscarBibliotecaSteam() {
     }
 
     mostrarBtnStatus("Carregando biblioteca...");
-    const jogos = await buscarJogos(steamId64);
+    const jogos = await buscarJogos(steamId64, apiKey);
 
-    // Salva Steam ID no Firestore para próxima vez
+    // Salva Steam ID e API Key no Firestore para próxima vez
     if (usuarioAtual) {
-      await salvarSteamId(usuarioAtual.uid, steamId64);
+      await salvarSteamId(usuarioAtual.uid, steamId64, apiKey);
     }
 
     todosJogosSteam = jogos.sort((a, b) => (b.playtime_forever || 0) - (a.playtime_forever || 0));

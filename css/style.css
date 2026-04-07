@@ -1165,15 +1165,16 @@
 
 .steam-form {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
 }
 
-.steam-form .quiz-input {
-  flex: 1;
-  min-width: 200px;
-  margin-bottom: 0;
+.steam-form .btn {
+  align-self: center;
+  width: auto;
+  padding: 10px 32px;
 }
 
 .steam-erro {
