@@ -435,13 +435,5 @@ function renderCuriosidades(lista) {
   `).join("");
 }
 
-// Redirecionar para hubs dedicados
-const HUBS_DEDICADOS = {
-  "1245620": "../pages/elden-ring.html",
-};
-
-if (HUBS_DEDICADOS[APPID]) {
-  location.replace(HUBS_DEDICADOS[APPID]);
-} else {
-  renderHub();
-}
+// Iniciar
+renderHub();
