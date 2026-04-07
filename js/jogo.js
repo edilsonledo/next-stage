@@ -348,10 +348,9 @@ function renderHub() {
 
   // Título da aba
   document.title = `${nome} — Next Stage`;
-  document.getElementById("page-title").textContent = `${nome} — Next Stage`;
 
   if (dados?.recursos) {
-    // ── Jogo mapeado: mostra hero + recursos ──
+    // ── Jogo mapeado: mostra hero + recursos + curiosidades ──
     const imgUrl = `https://cdn.cloudflare.steamstatic.com/steam/apps/${APPID}/header.jpg`;
     const bgUrl  = `https://cdn.cloudflare.steamstatic.com/steam/apps/${APPID}/library_hero.jpg`;
 
@@ -362,19 +361,30 @@ function renderHub() {
     document.getElementById("jogo-steam-link").href = `https://store.steampowered.com/app/${APPID}/`;
     document.getElementById("jogo-hero-bg").style.backgroundImage = `url('${bgUrl}')`;
 
-    // Insere seção de recursos no main
     const main = document.getElementById("jogo-main");
+
+    // Seção de recursos
     const secRecursos = document.createElement("section");
-    secRecursos.innerHTML = `<h2 class="section-title">🔗 Recursos úteis</h2><div id="recursos-grid" class="recursos-grid"></div>`;
+    secRecursos.innerHTML = `
+      <h2 class="section-title">🔗 Recursos úteis</h2>
+      <div id="recursos-grid" class="recursos-grid"></div>
+    `;
     main.insertBefore(secRecursos, main.firstChild);
     renderRecursos(dados.recursos, "recursos-grid");
 
+    // Curiosidades
     if (dados.curiosidades?.length) {
-      document.getElementById("section-curiosidades").classList.remove("hidden");
+      const secCuriosidades = document.createElement("section");
+      secCuriosidades.innerHTML = `
+        <h2 class="section-title">💡 Curiosidades</h2>
+        <div id="curiosidades-list" class="curiosidades-list"></div>
+      `;
+      main.appendChild(secCuriosidades);
       renderCuriosidades(dados.curiosidades);
     }
+
   } else {
-    // ── Jogo não mapeado: tela de em construção ──
+    // ── Jogo não mapeado: tela WIP (limpa o main inteiro) ──
     renderEmConstrucao(nome);
   }
 }
