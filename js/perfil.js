@@ -272,13 +272,16 @@ function renderSteamGrid(reset) {
     card.className = "card";
     card.innerHTML = `
       <div class="card__img-wrapper">
-        <img
-          class="card__img"
-          src="https://cdn.cloudflare.steamstatic.com/steam/apps/${jogo.appid}/header.jpg"
-          alt="${jogo.name}"
-          loading="lazy"
-          onerror="this.src='https://placehold.co/460x215/1b2838/66c0f4?text=${encodeURIComponent(jogo.name.slice(0, 20))}'"
-        >
+        <a href="../pages/jogo.html?appid=${jogo.appid}&name=${encodeURIComponent(jogo.name)}" class="card__img-link" title="Abrir Hub: ${jogo.name}">
+          <img
+            class="card__img"
+            src="https://cdn.cloudflare.steamstatic.com/steam/apps/${jogo.appid}/header.jpg"
+            alt="${jogo.name}"
+            loading="lazy"
+            onerror="this.src='https://placehold.co/460x215/1b2838/66c0f4?text=${encodeURIComponent(jogo.name.slice(0, 20))}'"
+          >
+          <div class="card__img-overlay"><span>🎮 Ver Hub</span></div>
+        </a>
       </div>
       <div class="card__body">
         <p class="card__title">${jogo.name}</p>

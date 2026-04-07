@@ -1228,3 +1228,254 @@
   padding-bottom: 12px;
 }
 
+/* =============================================
+   Card — imagem clicável (hub do jogo)
+   ============================================= */
+.card__img-link {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.card__img-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.card__img-overlay span {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--accent);
+  color: #0d1b2a;
+  padding: 6px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.card__img-link:hover .card__img-overlay {
+  opacity: 1;
+}
+
+.card__img-link:hover .card__img {
+  transform: scale(1.04);
+}
+
+/* =============================================
+   Game Hub — jogo.html
+   ============================================= */
+
+/* Hero */
+.jogo-hero {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+
+.jogo-hero__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+  filter: blur(3px) brightness(0.45);
+  transform: scale(1.06);
+}
+
+.jogo-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,15,22,1) 0%, rgba(10,15,22,0.3) 60%, transparent 100%);
+}
+
+.jogo-hero__content {
+  position: relative;
+  z-index: 1;
+  padding-top: 32px;
+  padding-bottom: 36px;
+  width: 100%;
+}
+
+.jogo-back {
+  display: inline-block;
+  color: rgba(255,255,255,0.65);
+  font-size: 13px;
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: color 0.2s;
+}
+
+.jogo-back:hover {
+  color: var(--accent);
+}
+
+.jogo-hero__info {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.jogo-capa {
+  width: 230px;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  flex-shrink: 0;
+}
+
+.jogo-nome {
+  font-size: clamp(24px, 5vw, 40px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  margin-bottom: 10px;
+}
+
+.jogo-horas-badge {
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 8px;
+}
+
+/* Recursos grid */
+.recursos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+  margin-bottom: 48px;
+}
+
+.recurso-categoria {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recurso-cat-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 8px;
+  margin-bottom: 2px;
+}
+
+.recurso-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recurso-card {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  text-decoration: none;
+  transition: background 0.18s, border-color 0.18s, transform 0.15s;
+  position: relative;
+}
+
+.recurso-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.recurso-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e8edf2;
+}
+
+.recurso-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.4;
+}
+
+.recurso-arrow {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.18s, right 0.18s;
+}
+
+.recurso-card:hover .recurso-arrow {
+  opacity: 1;
+  right: 10px;
+}
+
+/* Curiosidades */
+.curiosidades-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+  margin-bottom: 56px;
+}
+
+.curiosidade-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  transition: background 0.18s;
+}
+
+.curiosidade-item:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+.curiosidade-num {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--accent);
+  opacity: 0.45;
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 28px;
+}
+
+.curiosidade-texto {
+  font-size: 15px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.65;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .jogo-capa { width: 140px; }
+  .jogo-hero { min-height: 260px; }
+  .recursos-grid { grid-template-columns: 1fr; }
+}
+

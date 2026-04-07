@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Hub do Jogo — Next Stage</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <a href="../index.html" class="header__logo">Next Stage</a>
+  <nav class="nav" id="mainNav">
+    <ul class="nav__list">
+      <li><a class="nav__link" href="../index.html">Inicio</a></li>
+      <li><a class="nav__link" href="quiz.html">Encontrar Jogo</a></li>
+      <li><a class="nav__link" href="catalogo.html">Catalogo</a></li>
+    </ul>
+  </nav>
+  <div id="auth-area" class="auth-area"></div>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main>
+
+  <!-- Hero do jogo -->
+  <div id="jogo-hero" class="jogo-hero">
+    <div class="jogo-hero__bg" id="jogo-hero-bg"></div>
+    <div class="jogo-hero__overlay"></div>
+    <div class="jogo-hero__content container">
+      <a href="perfil.html" class="jogo-back">← Voltar ao perfil</a>
+      <div class="jogo-hero__info">
+        <img id="jogo-capa" class="jogo-capa" src="" alt="">
+        <div>
+          <h1 id="jogo-nome" class="jogo-nome"></h1>
+          <div id="jogo-horas" class="jogo-horas-badge"></div>
+          <a id="jogo-steam-link" href="#" target="_blank" rel="noopener" class="btn" style="width:auto;margin-top:12px;padding:10px 20px">
+            🎮 Abrir na Steam
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Links rápidos (recursos do jogo) -->
+    <section>
+      <h2 class="section-title">🔗 Recursos úteis</h2>
+      <div id="recursos-grid" class="recursos-grid"></div>
+    </section>
+
+    <!-- Curiosidades -->
+    <section id="section-curiosidades" class="hidden">
+      <h2 class="section-title">💡 Curiosidades</h2>
+      <div id="curiosidades-list" class="curiosidades-list"></div>
+    </section>
+
+    <!-- Jogo não mapeado -->
+    <div id="jogo-generico" class="hidden">
+      <section>
+        <h2 class="section-title">🔗 Recursos úteis</h2>
+        <div id="recursos-genericos" class="recursos-grid"></div>
+      </section>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  &copy; 2026 Next Stage &nbsp;&middot;&nbsp; Feito para quem termina jogos e fica perdido
+</footer>
+
+<script type="module" src="../js/jogo.js"></script>
+</body>
+</html>
