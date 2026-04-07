@@ -1,4 +1,4 @@
-/* ── Hero Full (página inicial) ── */
+﻿/* â”€â”€ Hero Full (pÃ¡gina inicial) â”€â”€ */
 .hero-full {
   min-height: 88vh;
   display: flex;
@@ -6,16 +6,17 @@
   justify-content: space-between;
   gap: 40px;
   padding: 60px 80px;
-  background: linear-gradient(135deg, #0a1628 0%, #0f2240 50%, #1a3a5c 100%);
+  background: linear-gradient(135deg, #0d0f14 0%, #130e08 55%, #1a1008 100%);
   position: relative;
   overflow: hidden;
 }
 
-.hero-full::before {
-  content: "";
+.hero-full__bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 70% 50%, rgba(102,192,244,0.08) 0%, transparent 60%);
+  background:
+    radial-gradient(ellipse at 75% 60%, rgba(255,107,53,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(255,107,53,0.06) 0%, transparent 40%);
   pointer-events: none;
 }
 
@@ -31,8 +32,8 @@
   text-transform: uppercase;
   letter-spacing: 3px;
   color: var(--accent);
-  background: rgba(102,192,244,0.1);
-  border: 1px solid rgba(102,192,244,0.3);
+  background: rgba(255,107,53,0.12);
+  border: 1px solid rgba(255,107,53,0.35);
   border-radius: 20px;
   padding: 4px 14px;
   margin-bottom: 20px;
@@ -46,6 +47,13 @@
   margin-bottom: 20px;
 }
 
+.hero__title--fire {
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .hero__sub {
   font-size: 16px;
   color: var(--text-muted);
@@ -57,6 +65,7 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  margin-bottom: 32px;
 }
 
 .btn--lg {
@@ -64,7 +73,64 @@
   font-size: 15px;
 }
 
-/* Visual hero - bolhas de chat */
+.btn--fire {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  color: #fff;
+  box-shadow: 0 4px 24px rgba(255,107,53,0.35);
+  border: none;
+}
+
+.btn--fire:hover {
+  background: linear-gradient(135deg, #ff8055 0%, var(--accent) 100%);
+  box-shadow: 0 6px 32px rgba(255,107,53,0.5);
+  transform: translateY(-2px);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.btn--ghost:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* Hero stats strip */
+.hero__stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.hero__stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero__stat-n {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.hero__stat span:last-child {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero__stat-div {
+  width: 1px;
+  height: 32px;
+  background: rgba(255,255,255,0.1);
+}
+
+/* Visual hero - bonfire + bolhas */
 .hero-full__visual {
   flex: 1;
   display: flex;
@@ -76,10 +142,28 @@
   z-index: 1;
 }
 
-.controller-icon {
-  font-size: 80px;
-  filter: drop-shadow(0 0 30px rgba(102,192,244,0.4));
+.hero-bonfire {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.hero-bonfire__logo {
+  width: 180px;
+  height: auto;
+  filter: drop-shadow(0 0 40px rgba(255,107,53,0.55));
   animation: float 3s ease-in-out infinite;
+}
+
+.hero-bonfire__glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,107,53,0.18) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 @keyframes float {
@@ -88,8 +172,8 @@
 }
 
 .bubble {
-  background: rgba(42,71,94,0.9);
-  border: 1px solid rgba(102,192,244,0.2);
+  background: rgba(22,27,36,0.92);
+  border: 1px solid rgba(255,107,53,0.18);
   border-radius: 16px;
   padding: 10px 18px;
   font-size: 14px;
@@ -108,7 +192,7 @@
   to   { opacity: 1; transform: translateY(0);    }
 }
 
-/* ── How it works ── */
+/* â”€â”€ How it works â”€â”€ */
 .how-it-works {
   margin-bottom: 10px;
 }
@@ -124,7 +208,7 @@
   background: var(--bg-section);
   border-radius: var(--radius);
   padding: 28px 24px;
-  border: 1px solid #2a475e;
+  border: 1px solid #1e2635;
   transition: border-color var(--transition), transform var(--transition);
 }
 
@@ -150,7 +234,7 @@
   line-height: 1.6;
 }
 
-/* ── Section sub ── */
+/* â”€â”€ Section sub â”€â”€ */
 .section-sub {
   font-size: 14px;
   color: var(--text-muted);
@@ -158,7 +242,7 @@
   margin-bottom: 16px;
 }
 
-/* ── Mood buttons ── */
+/* â”€â”€ Mood buttons â”€â”€ */
 .mood-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -188,18 +272,18 @@
 .mood-btn:hover,
 .mood-btn.active {
   border-color: var(--accent);
-  background: rgba(102,192,244,0.08);
+  background: rgba(255,107,53,0.06);
   color: #fff;
   transform: translateY(-2px);
 }
 
-/* ── Resultado do mood ── */
+/* â”€â”€ Resultado do mood â”€â”€ */
 .mood-resultado {
   margin-top: 24px;
   padding: 24px;
   background: var(--bg-section);
   border-radius: var(--radius);
-  border: 1px solid #2a475e;
+  border: 1px solid #1e2635;
 }
 
 .mood-resultado h3 {
@@ -216,7 +300,7 @@
   display: none !important;
 }
 
-/* ── Quiz page ── */
+/* â”€â”€ Quiz page â”€â”€ */
 .quiz-wrapper {
   max-width: 700px;
   margin: 0 auto;
@@ -271,19 +355,19 @@
 
 .quiz-option:hover {
   border-color: var(--accent);
-  background: rgba(102,192,244,0.08);
+  background: rgba(255,107,53,0.06);
 }
 
 .quiz-option.selected {
   border-color: var(--accent);
-  background: rgba(102,192,244,0.15);
+  background: rgba(255,107,53,0.12);
   color: #fff;
 }
 
 .quiz-input {
   width: 100%;
   background: var(--bg-card);
-  border: 1px solid #2a475e;
+  border: 1px solid #1e2635;
   border-radius: var(--radius);
   padding: 14px 16px;
   color: var(--text);
@@ -318,14 +402,14 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #2a475e;
+  background: #1e2635;
   transition: background var(--transition);
 }
 
 .quiz-dot.done  { background: var(--accent); }
 .quiz-dot.active { background: #fff; transform: scale(1.3); }
 
-/* ── Resultado do quiz ── */
+/* â”€â”€ Resultado do quiz â”€â”€ */
 .resultado-header {
   text-align: center;
   padding: 32px 0 20px;
@@ -343,7 +427,7 @@
 }
 
 .resultado-destaque {
-  background: linear-gradient(135deg, #0f2240, #1a3a5c);
+  background: linear-gradient(135deg, #130e08, #1a1008);
   border: 1px solid var(--accent);
   border-radius: 12px;
   padding: 28px;
@@ -356,14 +440,14 @@
 }
 
 .resultado-destaque::before {
-  content: "✨ Melhor escolha";
+  content: "âœ¨ Melhor escolha";
   position: absolute;
   top: 12px;
   right: 14px;
   font-size: 11px;
   color: var(--accent);
-  background: rgba(102,192,244,0.1);
-  border: 1px solid rgba(102,192,244,0.3);
+  background: rgba(255,107,53,0.08);
+  border: 1px solid rgba(255,107,53,0.25);
   border-radius: 20px;
   padding: 3px 10px;
 }
@@ -398,12 +482,12 @@
   font-size: 11px;
   padding: 3px 10px;
   border-radius: 20px;
-  background: rgba(102,192,244,0.12);
+  background: rgba(255,107,53,0.10);
   color: var(--accent);
-  border: 1px solid rgba(102,192,244,0.25);
+  border: 1px solid rgba(255,107,53,0.20);
 }
 
-/* ── Catalogo ── */
+/* â”€â”€ Catalogo â”€â”€ */
 .catalogo-header {
   display: flex;
   justify-content: space-between;
@@ -413,7 +497,7 @@
   margin-bottom: 20px;
 }
 
-/* ── Header ── */
+/* â”€â”€ Header â”€â”€ */
 .header {
   display: flex;
   justify-content: space-between;
@@ -428,22 +512,32 @@
 }
 
 .header__logo {
-  font-size: 22px;
-  font-weight: bold;
-  color: var(--accent);
-  letter-spacing: 1px;
   display: flex;
   align-items: center;
   gap: 8px;
+  text-decoration: none;
 }
 
+.header__logo-img {
+  height: 34px;
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(255,107,53,0.4));
+  transition: filter var(--transition);
+}
+
+.header__logo-img:hover {
+  filter: drop-shadow(0 0 14px rgba(255,107,53,0.7));
+}
+
+/* fallback text for pages without img */
 .header__logo span {
-  color: var(--text);
-  font-weight: normal;
-  font-size: 14px;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: 1px;
 }
 
-/* ── Nav ── */
+/* â”€â”€ Nav â”€â”€ */
 .nav__list {
   display: flex;
   gap: 8px;
@@ -459,11 +553,11 @@
 
 .nav__link:hover,
 .nav__link.active {
-  background: rgba(102,192,244,0.15);
+  background: rgba(255,107,53,0.12);
   color: var(--accent);
 }
 
-/* ── Hamburger ── */
+/* â”€â”€ Hamburger â”€â”€ */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -482,13 +576,13 @@
   transition: var(--transition);
 }
 
-/* ── Footer ── */
+/* â”€â”€ Footer â”€â”€ */
 .footer {
   text-align: center;
   padding: 28px 20px;
   color: var(--text-muted);
   font-size: 13px;
-  border-top: 1px solid #2a475e;
+  border-top: 1px solid rgba(255,107,53,0.15);
   margin-top: auto;
 }
 
@@ -500,7 +594,7 @@
   text-decoration: underline;
 }
 
-/* ── Container ── */
+/* â”€â”€ Container â”€â”€ */
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -508,7 +602,7 @@
   flex: 1;
 }
 
-/* ── Section title ── */
+/* â”€â”€ Section title â”€â”€ */
 .section-title {
   font-size: 20px;
   font-weight: bold;
@@ -520,14 +614,14 @@
   gap: 8px;
 }
 
-/* ── Grid de cards ── */
+/* â”€â”€ Grid de cards â”€â”€ */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
 }
 
-/* ── Card ── */
+/* â”€â”€ Card â”€â”€ */
 .card {
   background: var(--bg-card);
   border-radius: var(--radius);
@@ -593,12 +687,12 @@
   font-size: 11px;
   padding: 2px 7px;
   border-radius: 20px;
-  background: rgba(102,192,244,0.15);
+  background: rgba(255,107,53,0.12);
   color: var(--accent);
   width: fit-content;
 }
 
-/* ── Botão ── */
+/* â”€â”€ BotÃ£o â”€â”€ */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -626,10 +720,10 @@
 }
 
 .btn--outline:hover {
-  background: rgba(102,192,244,0.1);
+  background: rgba(255,107,53,0.1);
 }
 
-/* ── Skeleton ── */
+/* â”€â”€ Skeleton â”€â”€ */
 .skeleton-card {
   background: var(--bg-card);
   border-radius: var(--radius);
@@ -639,14 +733,14 @@
 .skeleton__img {
   width: 100%;
   aspect-ratio: 460 / 215;
-  background: #1e3448;
+  background: #161b24;
   animation: shimmer 1.4s infinite;
 }
 
 .skeleton__line {
   height: 14px;
   border-radius: 4px;
-  background: #1e3448;
+  background: #161b24;
   margin: 10px 12px 6px;
   animation: shimmer 1.4s infinite;
 }
@@ -662,7 +756,7 @@
   50%       { opacity: 0.9; }
 }
 
-/* ── Erro ── */
+/* â”€â”€ Erro â”€â”€ */
 .error-msg {
   color: var(--red);
   padding: 14px;
@@ -672,7 +766,7 @@
   font-size: 14px;
 }
 
-/* ── Hero banner ── */
+/* â”€â”€ Hero banner â”€â”€ */
 .hero {
   background: linear-gradient(135deg, #0f1c2e 0%, #1b3a5c 100%);
   border-radius: var(--radius);
@@ -715,7 +809,7 @@
   font-size: 14px;
 }
 
-/* ── Search bar ── */
+/* â”€â”€ Search bar â”€â”€ */
 .search-bar {
   display: flex;
   gap: 8px;
@@ -725,7 +819,7 @@
 .search-bar input {
   flex: 1;
   background: var(--bg-card);
-  border: 1px solid #2a475e;
+  border: 1px solid #1e2635;
   border-radius: 4px;
   padding: 10px 14px;
   color: var(--text);
@@ -747,7 +841,7 @@
   padding: 10px 18px;
 }
 
-/* ── Filter tabs ── */
+/* â”€â”€ Filter tabs â”€â”€ */
 .filter-tabs {
   display: flex;
   gap: 8px;
@@ -770,13 +864,13 @@
 .filter-tab.active {
   border-color: var(--accent);
   color: var(--accent);
-  background: rgba(102,192,244,0.08);
+  background: rgba(255,107,53,0.06);
 }
 
-/* ── Page header ── */
+/* â”€â”€ Page header â”€â”€ */
 .page-header {
   padding: 32px 0 8px;
-  border-bottom: 1px solid #2a475e;
+  border-bottom: 1px solid #1e2635;
   margin-bottom: 28px;
 }
 
@@ -790,7 +884,7 @@
   margin-top: 6px;
 }
 
-/* ── Responsivo ── */
+/* â”€â”€ Responsivo â”€â”€ */
 @media (max-width: 640px) {
   .header { padding: 0 16px; }
 
@@ -835,9 +929,9 @@
   .container { padding: 16px 12px; }
 }
 
-/* ════════════════════════════════════════
-   AUTH — Botão e avatar no header
-════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   AUTH â€” BotÃ£o e avatar no header
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .auth-area {
   display: flex;
   align-items: center;
@@ -893,7 +987,7 @@
 
 .auth-user:hover {
   border-color: var(--accent);
-  background: rgba(102,192,244,0.08);
+  background: rgba(255,107,53,0.06);
 }
 
 .auth-avatar {
@@ -909,9 +1003,9 @@
   font-weight: bold;
 }
 
-/* ════════════════════════════════════════
-   PERFIL — Página de perfil
-════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   PERFIL â€” PÃ¡gina de perfil
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .perfil-loading {
   display: flex;
   flex-direction: column;
@@ -925,7 +1019,7 @@
 .spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid #2a475e;
+  border: 3px solid #1e2635;
   border-top-color: var(--accent);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -963,7 +1057,7 @@
   gap: 8px;
 }
 
-/* Card do usuário */
+/* Card do usuÃ¡rio */
 .perfil-card {
   display: flex;
   align-items: center;
@@ -971,7 +1065,7 @@
   background: var(--bg-section);
   border-radius: 12px;
   padding: 28px;
-  border: 1px solid #2a475e;
+  border: 1px solid #1e2635;
   margin-bottom: 28px;
   flex-wrap: wrap;
 }
@@ -1035,7 +1129,7 @@
 .perfil-tabs {
   display: flex;
   gap: 4px;
-  border-bottom: 1px solid #2a475e;
+  border-bottom: 1px solid #1e2635;
   margin-bottom: 24px;
 }
 
@@ -1075,15 +1169,15 @@
   font-size: 15px;
 }
 
-/* ════════════════════════════════════════
-   TOAST — Notificação de ação
-════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   TOAST â€” NotificaÃ§Ã£o de aÃ§Ã£o
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .toast {
   position: fixed;
   bottom: 28px;
   left: 50%;
   transform: translateX(-50%) translateY(80px);
-  background: #1e3448;
+  background: #161b24;
   border: 1px solid var(--accent);
   color: var(--text);
   padding: 12px 24px;
@@ -1107,9 +1201,9 @@
   .perfil-stats { justify-content: center; }
 }
 
-/* ════════════════════════════════════════
-   STEAM — Biblioteca Steam no perfil
-════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   STEAM â€” Biblioteca Steam no perfil
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .steam-connect {
   text-align: center;
   padding: 40px 20px;
@@ -1195,7 +1289,7 @@
   gap: 10px;
   margin-bottom: 16px;
   padding-bottom: 14px;
-  border-bottom: 1px solid #2a475e;
+  border-bottom: 1px solid #1e2635;
 }
 
 .steam-resultado__nome {
@@ -1209,8 +1303,8 @@
   margin-left: 10px;
   font-size: 13px;
   color: var(--accent);
-  background: rgba(102,192,244,0.1);
-  border: 1px solid rgba(102,192,244,0.25);
+  background: rgba(255,107,53,0.08);
+  border: 1px solid rgba(255,107,53,0.20);
   border-radius: 20px;
   padding: 2px 10px;
 }
@@ -1229,7 +1323,7 @@
 }
 
 /* =============================================
-   Card — imagem clicável (hub do jogo)
+   Card â€” imagem clicÃ¡vel (hub do jogo)
    ============================================= */
 .card__img-link {
   display: block;
@@ -1269,7 +1363,7 @@
 }
 
 /* =============================================
-   Game Hub — jogo.html
+   Game Hub â€” jogo.html
    ============================================= */
 
 /* Hero */
@@ -1480,7 +1574,7 @@
 }
 
 /* =============================================
-   WIP PAGE — pages/em-construcao.html
+   WIP PAGE â€” pages/em-construcao.html
    ============================================= */
 .wip-page {
   min-height: calc(100vh - 120px);
@@ -1662,7 +1756,7 @@
   margin-bottom: 20px;
 }
 
-/* Links úteis da tela WIP */
+/* Links Ãºteis da tela WIP */
 .wip-links {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -1731,4 +1825,5 @@
   .wip-title { font-size: 24px; }
   .wip-icon  { font-size: 56px; }
 }
+
 

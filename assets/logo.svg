@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
+  <!-- Chama externa (laranja) -->
+  <path d="M28 48 C20 38 16 28 22 18 C24 28 28 22 30 14 C34 22 32 32 38 22 C42 32 38 40 42 48 Z" fill="#ff6b35"/>
+  <!-- Chama interna (amarela) -->
+  <path d="M28 48 C23 40 22 32 26 24 C27 31 30 27 31 21 C34 28 32 36 35 28 C37 34 35 42 38 48 Z" fill="#ffd93d"/>
+  <!-- Centro brilhante -->
+  <path d="M29 48 C26 43 26 37 28 31 C29 36 31 33 32 28 C34 33 33 39 35 34 C36 39 34 44 33 48 Z" fill="#fff" opacity="0.4"/>
+  <!-- Toras da fogueira -->
+  <ellipse cx="33" cy="50" rx="14" ry="4" fill="#8b5e3c" opacity="0.9"/>
+  <rect x="20" y="47" width="26" height="4" rx="2" fill="#6b4226"/>
+  <!-- Tora cruzada -->
+  <rect x="19" y="48" width="28" height="3" rx="1.5" fill="#8b5e3c" transform="rotate(-12 33 50)"/>
+  <rect x="19" y="48" width="28" height="3" rx="1.5" fill="#6b4226" transform="rotate(12 33 50)"/>
+
+  <!-- Texto "bonfire" -->
+  <text x="58" y="38" font-family="'Segoe UI', Arial, sans-serif" font-weight="800" font-size="26" fill="#ffffff" letter-spacing="-0.5">bonfire</text>
+  <!-- Ponto .gg -->
+  <text x="161" y="38" font-family="'Segoe UI', Arial, sans-serif" font-weight="700" font-size="18" fill="#ff6b35">.gg</text>
+</svg>

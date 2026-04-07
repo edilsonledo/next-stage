@@ -3,20 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Terminou um jogo e nao sabe o que jogar agora? O Next Stage te ajuda a escolher o proximo.">
-  <title>Next Stage - Seu proximo jogo te espera</title>
+  <meta name="description" content="Terminou um jogo e não sabe o que jogar agora? A Bonfire te ajuda a escolher o próximo.">
+  <title>Bonfire.gg — Acenda a próxima aventura</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <header class="header">
-  <a href="index.html" class="header__logo">Next Stage</a>
+  <a href="index.html" class="header__logo">
+    <img src="assets/logo.svg" alt="Bonfire.gg" class="header__logo-img">
+  </a>
   <nav class="nav" id="mainNav">
     <ul class="nav__list">
-      <li><a class="nav__link" href="index.html">Inicio</a></li>
+      <li><a class="nav__link" href="index.html">Início</a></li>
       <li><a class="nav__link" href="pages/quiz.html">Encontrar Jogo</a></li>
-      <li><a class="nav__link" href="pages/catalogo.html">Catalogo</a></li>
+      <li><a class="nav__link" href="pages/catalogo.html">Catálogo</a></li>
     </ul>
   </nav>
   <div id="auth-area" class="auth-area"></div>
@@ -27,24 +29,36 @@
 
 <main>
 
-  <!-- Hero: o problema real -->
+  <!-- Hero -->
   <section class="hero-full">
+    <div class="hero-full__bg"></div>
     <div class="hero-full__content">
-      <p class="hero__tag">Sentiu a ressaca do jogo?</p>
-      <h1 class="hero__title">Acabou o jogo.<br>E agora?</h1>
+      <p class="hero__tag">🔥 Sentiu a ressaca do jogo?</p>
+      <h1 class="hero__title">Zerou.<br><span class="hero__title--fire">E agora?</span></h1>
       <p class="hero__sub">
-        Aquela sensacao de terminar um jogo incrivel e nao saber o que jogar a seguir.
-        O Next Stage resolve isso: diga o que voce acabou de jogar e receba o proximo.
+        Aquela sensação de terminar um jogo incrível e não saber o que jogar a seguir.
+        A Bonfire resolve isso — diga o que você acabou de jogar e receba o próximo.
       </p>
       <div class="hero__actions">
-        <a href="pages/quiz.html" class="btn btn--lg">Encontrar meu proximo jogo</a>
+        <a href="pages/quiz.html" class="btn btn--lg btn--fire">🔥 Encontrar meu próximo jogo</a>
+        <a href="pages/catalogo.html" class="btn btn--ghost">Ver Catálogo</a>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat"><span class="hero__stat-n">28+</span><span>jogos no catálogo</span></div>
+        <div class="hero__stat-div"></div>
+        <div class="hero__stat"><span class="hero__stat-n">100%</span><span>grátis</span></div>
+        <div class="hero__stat-div"></div>
+        <div class="hero__stat"><span class="hero__stat-n">Steam</span><span>integrado</span></div>
       </div>
     </div>
     <div class="hero-full__visual" aria-hidden="true">
-      <div class="controller-icon">🎮</div>
-      <div class="bubble bubble--1">"Finishei Hades..."</div>
-      <div class="bubble bubble--2">"Que jogo eu jogo agora?"</div>
-      <div class="bubble bubble--3">"Nao tem mais nada pra jogar"</div>
+      <div class="hero-bonfire">
+        <img src="assets/logo.svg" alt="" class="hero-bonfire__logo">
+        <div class="hero-bonfire__glow"></div>
+      </div>
+      <div class="bubble bubble--1">"Finishei Elden Ring..."</div>
+      <div class="bubble bubble--2">"O que eu jogo agora??"</div>
+      <div class="bubble bubble--3">"Não tem mais nada pra jogar"</div>
     </div>
   </section>
 
@@ -56,18 +70,18 @@
       <div class="steps">
         <div class="step">
           <div class="step__icon">🎯</div>
-          <h3>1. Diga o que voce jogou</h3>
-          <p>Informe o ultimo jogo que voce terminou e o quanto curtiu.</p>
+          <h3>1. Diga o que você jogou</h3>
+          <p>Informe o último jogo que você terminou e o quanto curtiu.</p>
         </div>
         <div class="step">
           <div class="step__icon">🧠</div>
-          <h3>2. Conta o que voce gosta</h3>
-          <p>Escolha o que mais importa: historia, gameplay, duracao, genero...</p>
+          <h3>2. Conta o que você gosta</h3>
+          <p>Escolha o que mais importa: história, gameplay, duração, gênero...</p>
         </div>
         <div class="step">
-          <div class="step__icon">🚀</div>
-          <h3>3. Receba seu proximo jogo</h3>
-          <p>Veja recomendacoes personalizadas com links diretos para a Steam.</p>
+          <div class="step__icon">�</div>
+          <h3>3. Acenda a próxima aventura</h3>
+          <p>Veja recomendações personalizadas com links diretos para a Steam.</p>
         </div>
       </div>
     </section>
@@ -79,16 +93,16 @@
       <div class="grid" id="ressacas-grid"></div>
     </section>
 
-    <!-- Recomendacoes rapidas por humor -->
+    <!-- Humor do jogador -->
     <section>
-      <h2 class="section-title">Como voce esta se sentindo?</h2>
-      <p class="section-sub">Escolha seu humor de jogador agora e receba sugestoes.</p>
+      <h2 class="section-title">Como você está se sentindo?</h2>
+      <p class="section-sub">Escolha seu humor de jogador agora e receba sugestões.</p>
       <div class="mood-grid" id="mood-grid">
         <button class="mood-btn" data-mood="vazio">
-          <span>😞</span> Vazio, quero me envolver em uma historia
+          <span>😞</span> Vazio, quero me envolver em uma história
         </button>
         <button class="mood-btn" data-mood="adrenalina">
-          <span>⚡</span> Quero adrenalina e acao
+          <span>⚡</span> Quero adrenalina e ação
         </button>
         <button class="mood-btn" data-mood="relaxar">
           <span>😌</span> Quero relaxar e explorar
@@ -110,8 +124,8 @@
 </main>
 
 <footer class="footer">
-  &copy; 2026 Next Stage &nbsp;&middot;&nbsp;
-  Feito para quem termina jogos e fica perdido &nbsp;&middot;&nbsp;
+  &copy; 2026 <strong>Bonfire.gg</strong> &nbsp;&middot;&nbsp;
+  Acenda a próxima aventura &nbsp;&middot;&nbsp;
   Dados via <a href="https://steamspy.com" target="_blank" rel="noopener">SteamSpy</a>
 </footer>
 

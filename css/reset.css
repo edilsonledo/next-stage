@@ -6,19 +6,21 @@
 }
 
 :root {
-  --bg:            #1b2838;
-  --bg-header:     #171a21;
-  --bg-card:       #2a475e;
-  --bg-card-hover: #3b6a8a;
-  --bg-section:    #1e2d3d;
-  --accent:        #66c0f4;
-  --accent-dark:   #4fa8d8;
-  --text:          #c7d5e0;
-  --text-muted:    #8f98a0;
-  --green:         #a4d007;
+  --bg:            #0d0f14;
+  --bg-header:     #0a0c10;
+  --bg-card:       #161b24;
+  --bg-card-hover: #1e2635;
+  --bg-section:    #111520;
+  --accent:        #ff6b35;
+  --accent2:       #ffd93d;
+  --accent-dark:   #e05520;
+  --accent-glow:   rgba(255,107,53,0.25);
+  --text:          #e8eaf0;
+  --text-muted:    #7a8499;
+  --green:         #39d353;
   --red:           #e06c6c;
   --radius:        8px;
-  --shadow:        0 4px 16px rgba(0,0,0,0.4);
+  --shadow:        0 4px 24px rgba(0,0,0,0.6);
   --transition:    0.2s ease;
 }
 
@@ -27,7 +29,7 @@ html {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
