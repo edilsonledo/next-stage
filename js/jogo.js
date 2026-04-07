@@ -350,27 +350,31 @@ function renderHub() {
   document.title = `${nome} — Next Stage`;
   document.getElementById("page-title").textContent = `${nome} — Next Stage`;
 
-  // Hero
-  const imgUrl = `https://cdn.cloudflare.steamstatic.com/steam/apps/${APPID}/header.jpg`;
-  const bgUrl  = `https://cdn.cloudflare.steamstatic.com/steam/apps/${APPID}/library_hero.jpg`;
-
-  document.getElementById("jogo-capa").src = imgUrl;
-  document.getElementById("jogo-capa").alt = nome;
-  document.getElementById("jogo-nome").textContent = nome;
-  document.getElementById("jogo-steam-link").href = `https://store.steampowered.com/app/${APPID}/`;
-
-  const heroBg = document.getElementById("jogo-hero-bg");
-  heroBg.style.backgroundImage = `url('${bgUrl}')`;
-
   if (dados?.recursos) {
-    // Jogo mapeado: renderiza normalmente
+    // ── Jogo mapeado: mostra hero + recursos ──
+    const imgUrl = `https://cdn.cloudflare.steamstatic.com/steam/apps/${APPID}/header.jpg`;
+    const bgUrl  = `https://cdn.cloudflare.steamstatic.com/steam/apps/${APPID}/library_hero.jpg`;
+
+    document.getElementById("jogo-hero").classList.remove("hidden");
+    document.getElementById("jogo-capa").src = imgUrl;
+    document.getElementById("jogo-capa").alt = nome;
+    document.getElementById("jogo-nome").textContent = nome;
+    document.getElementById("jogo-steam-link").href = `https://store.steampowered.com/app/${APPID}/`;
+    document.getElementById("jogo-hero-bg").style.backgroundImage = `url('${bgUrl}')`;
+
+    // Insere seção de recursos no main
+    const main = document.getElementById("jogo-main");
+    const secRecursos = document.createElement("section");
+    secRecursos.innerHTML = `<h2 class="section-title">🔗 Recursos úteis</h2><div id="recursos-grid" class="recursos-grid"></div>`;
+    main.insertBefore(secRecursos, main.firstChild);
     renderRecursos(dados.recursos, "recursos-grid");
+
     if (dados.curiosidades?.length) {
       document.getElementById("section-curiosidades").classList.remove("hidden");
       renderCuriosidades(dados.curiosidades);
     }
   } else {
-    // Jogo não mapeado: mostra tela de em construção divertida
+    // ── Jogo não mapeado: tela de em construção ──
     renderEmConstrucao(nome);
   }
 }
@@ -379,9 +383,8 @@ function renderEmConstrucao(nome) {
   const q = encodeURIComponent(nome);
   const appid = APPID;
 
-  // Substitui o conteúdo do main (dentro do container) por tela especial
-  const container = document.querySelector(".container");
-  container.innerHTML = `
+  const main = document.getElementById("jogo-main");
+  main.innerHTML = `
     <div class="wip-box">
 
       <div class="wip-icon">🚧</div>
