@@ -1480,8 +1480,113 @@
 }
 
 /* =============================================
-   WIP — Tela de Hub em Construção
+   WIP PAGE — pages/em-construcao.html
    ============================================= */
+.wip-page {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.wip-page__content {
+  text-align: center;
+  max-width: 520px;
+}
+
+/* Pixel art decorativo */
+.wip-pixel {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  font-size: 28px;
+  margin-bottom: 28px;
+  color: var(--accent);
+  letter-spacing: 4px;
+  animation: wip-blink 1.2s step-end infinite;
+}
+
+@keyframes wip-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+.wip-page__title {
+  font-size: clamp(28px, 6vw, 48px);
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  font-family: monospace;
+}
+
+.wip-page__msg {
+  font-size: 17px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.9;
+  margin-bottom: 32px;
+}
+
+.wip-page__hint {
+  display: block;
+  margin-top: 8px;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* Barra de progresso animada */
+.wip-page__bar {
+  height: 6px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 0 auto 10px;
+  max-width: 320px;
+}
+
+.wip-page__bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 99px;
+  animation: wip-load 4s ease-in-out infinite;
+}
+
+@keyframes wip-load {
+  0%   { width: 0%;   opacity: 1; }
+  70%  { width: 72%;  opacity: 1; }
+  85%  { width: 72%;  opacity: 0.5; }
+  100% { width: 0%;   opacity: 0; }
+}
+
+.wip-page__bar-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 36px;
+  letter-spacing: 0.5px;
+  font-family: monospace;
+}
+
+.wip-page__btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.wip-page__btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+
 .wip-box {
   max-width: 680px;
   margin: 60px auto 80px;

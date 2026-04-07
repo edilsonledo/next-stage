@@ -6,13 +6,15 @@
   <title>Hub do Jogo — Next Stage</title>
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">
-  <!-- Redirect instantâneo para hubs dedicados, antes de qualquer render -->
+  <!-- Redireciona: hubs dedicados vão para a página própria, o resto vai para em-construcao.html -->
   <script>
     (function () {
       var HUBS = { "1245620": "elden-ring.html" };
       var appid = new URLSearchParams(location.search).get("appid");
       if (appid && HUBS[appid]) {
         location.replace(HUBS[appid]);
+      } else {
+        location.replace("em-construcao.html");
       }
     })();
   </script>

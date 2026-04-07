@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Em Construção — Next Stage</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <a href="../index.html" class="header__logo">Next Stage</a>
+  <nav class="nav" id="mainNav">
+    <ul class="nav__list">
+      <li><a class="nav__link" href="../index.html">Inicio</a></li>
+      <li><a class="nav__link" href="quiz.html">Encontrar Jogo</a></li>
+      <li><a class="nav__link" href="catalogo.html">Catálogo</a></li>
+    </ul>
+  </nav>
+  <div id="auth-area" class="auth-area"></div>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main class="wip-page">
+  <div class="wip-page__content">
+
+    <div class="wip-pixel">
+      <span>█</span><span>░</span><span>█</span><span>░</span><span>█</span>
+    </div>
+
+    <h1 class="wip-page__title">HUB EM CONSTRUÇÃO</h1>
+
+    <p class="wip-page__msg">
+      Você chegou cedo demais, Tarnished.<br>
+      Nosso time ainda está farmando XP pra montar essa página.<br>
+      <span class="wip-page__hint">Volta depois que o hub der respawn. 🕹️</span>
+    </p>
+
+    <div class="wip-page__bar">
+      <div class="wip-page__bar-fill"></div>
+    </div>
+    <p class="wip-page__bar-label">Carregando conteúdo... talvez.</p>
+
+    <a href="perfil.html" class="wip-page__btn">← Voltar para a biblioteca</a>
+
+  </div>
+</main>
+
+<footer class="footer">
+  &copy; 2026 Next Stage &nbsp;&middot;&nbsp; Em construção, mas com muito amor
+</footer>
+
+<script type="module">
+  import { onUsuarioMudou } from "../js/auth.js";
+  import { renderAuthArea } from "../js/authHeader.js";
+  import { initHamburger } from "../js/utils.js";
+  initHamburger();
+  onUsuarioMudou(u => renderAuthArea(u, document.getElementById("auth-area")));
+</script>
+
+</body>
+</html>
