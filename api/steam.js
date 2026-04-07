@@ -59,7 +59,33 @@ module.exports = async function handler(req, res) {
 
     // ── Rota de health check ──
     if (action === "ping") {
-      return res.status(200).json({ ok: true, message: "Next Stage API funcionando!" });
+      return res.status(200).json({ ok: true, message: "Bonfire.gg API funcionando!" });
+    }
+
+    // ── Buscar preços via SteamSpy (lote de appids) ──
+    if (action === "prices") {
+      const { appids } = req.query;
+      if (!appids) return res.status(400).json({ error: "Parâmetro 'appids' obrigatório (separados por vírgula)." });
+
+      const ids = appids.split(",").slice(0, 100); // máx 100 por vez
+
+      // SteamSpy: busca em paralelo (máx 5 simultâneos para não throttle)
+      const results = {};
+      const batchSize = 5;
+      for (let i = 0; i < ids.length; i += batchSize) {
+        const batch = ids.slice(i, i + batchSize);
+        await Promise.all(batch.map(async (id) => {
+          try {
+            const r = await fetch(`https://steamspy.com/api.php?request=appdetails&appid=${id}`);
+            const d = await r.json();
+            // price em centavos USD
+            if (d && d.price !== undefined) {
+              results[id] = { price: d.price, initialprice: d.initialprice, name: d.name };
+            }
+          } catch { /* ignora erros individuais */ }
+        }));
+      }
+      return res.status(200).json(results);
     }
 
     return res.status(400).json({ error: "Parâmetro 'action' inválido. Use: resolve-vanity | library | ping" });

@@ -1322,6 +1322,114 @@
   padding-bottom: 12px;
 }
 
+/* ── Steam Layout (sidebar + biblioteca) ── */
+.steam-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ── Sidebar de estatísticas ── */
+.steam-sidebar {
+  position: sticky;
+  top: 76px;
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.steam-sidebar__title {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.steam-stat-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--bg-section);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 10px 12px;
+  transition: border-color var(--transition);
+}
+
+.steam-stat-card:hover {
+  border-color: rgba(255,107,53,0.25);
+}
+
+.steam-stat-card--highlight {
+  border-color: rgba(255,107,53,0.3);
+  background: rgba(255,107,53,0.05);
+}
+
+.steam-stat-card__icon {
+  font-size: 20px;
+  line-height: 1;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.steam-stat-card__label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 3px;
+}
+
+.steam-stat-card__val {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.steam-stat-card__val--sm {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.steam-stat-card__sub {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.steam-stat-card--highlight .steam-stat-card__val {
+  color: var(--accent2);
+}
+
+.steam-main {
+  min-width: 0;
+}
+
+/* Responsive: mobile empilha */
+@media (max-width: 860px) {
+  .steam-layout {
+    grid-template-columns: 1fr;
+  }
+  .steam-sidebar {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .steam-sidebar__title {
+    grid-column: 1 / -1;
+  }
+}
+
 /* =============================================
    Card â€” imagem clicÃ¡vel (hub do jogo)
    ============================================= */

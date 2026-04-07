@@ -236,6 +236,9 @@ async function buscarBibliotecaSteam({ silencioso = false } = {}) {
     document.getElementById("steam-connect").classList.add("hidden");
     document.getElementById("steam-resultado").classList.remove("hidden");
 
+    // Calcula e exibe as estatísticas (preços em background)
+    calcularStats(todosJogosSteam);
+
   } catch (e) {
     if (!silencioso) mostrarErroSteam(`⚠️ ${e.message}`);
     else console.warn("[Steam auto-load]", e.message);
@@ -302,4 +305,114 @@ function renderSteamGrid(reset) {
   const exibidos = Math.min(inicio + PER_PAGE, total);
   infoEl.textContent = `Exibindo ${exibidos} de ${total} jogos · ordenados por horas jogadas`;
   maisDiv.classList.toggle("hidden", exibidos >= total);
+}
+
+// ════════════════════════════════════════
+// ESTATÍSTICAS STEAM — sidebar
+// ════════════════════════════════════════
+
+function setStat(id, valor) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = valor;
+}
+
+function formatarHoras(minutos) {
+  const h = Math.round(minutos / 60);
+  if (h >= 1000) return `${(h / 1000).toFixed(1)}k h`;
+  return `${h.toLocaleString("pt-BR")} h`;
+}
+
+function calcularStats(jogos) {
+  if (!jogos?.length) return;
+
+  // Tempo total
+  const totalMin   = jogos.reduce((s, j) => s + (j.playtime_forever || 0), 0);
+  setStat("stat-tempo-total", formatarHoras(totalMin));
+
+  // Total de jogos
+  setStat("stat-total-jogos", jogos.length.toLocaleString("pt-BR"));
+
+  // Jogo mais jogado
+  const top = jogos[0]; // já vem ordenado por horas
+  if (top) setStat("stat-mais-jogado", `${top.name} (${formatarHoras(top.playtime_forever || 0)})`);
+
+  // Nunca iniciados (playtime_forever === 0 ou undefined)
+  const nuncaJogados = jogos.filter(j => !j.playtime_forever).length;
+  setStat("stat-nunca-jogados", nuncaJogados.toLocaleString("pt-BR"));
+
+  // Menos de 1 hora (mas >0)
+  const menos1h = jogos.filter(j => j.playtime_forever > 0 && j.playtime_forever < 60).length;
+  setStat("stat-menos-1h", menos1h.toLocaleString("pt-BR"));
+
+  // Mais de 100 horas
+  const mais100h = jogos.filter(j => (j.playtime_forever || 0) >= 6000).length;
+  setStat("stat-mais-100h", mais100h.toLocaleString("pt-BR"));
+
+  // Jogados recentemente (playtime_2weeks > 0)
+  const recentes = jogos.filter(j => j.playtime_2weeks > 0).length;
+  setStat("stat-recentes", recentes.toLocaleString("pt-BR"));
+
+  // Valor da conta — busca preços em background
+  setStat("stat-valor-conta", "Calculando...");
+  setStat("stat-custo-hora", "Calculando...");
+  buscarValorConta(jogos, totalMin);
+}
+
+async function buscarValorConta(jogos, totalMinutos) {
+  try {
+    // Pega apenas os appids com horas jogadas (mais relevantes)
+    // e limita a 200 para não sobrecarregar
+    const appids = jogos
+      .filter(j => (j.playtime_forever || 0) > 0)
+      .slice(0, 200)
+      .map(j => j.appid);
+
+    if (!appids.length) {
+      setStat("stat-valor-conta", "N/D");
+      setStat("stat-custo-hora", "N/D");
+      return;
+    }
+
+    // Chama em lotes de 100
+    let totalCentavos = 0;
+    let jogosComPreco = 0;
+
+    for (let i = 0; i < appids.length; i += 100) {
+      const lote   = appids.slice(i, i + 100).join(",");
+      const resp   = await chamarApi({ action: "prices", appids: lote });
+
+      Object.values(resp).forEach(d => {
+        const price = parseInt(d.price, 10);
+        if (!isNaN(price) && price > 0) {
+          totalCentavos += price;
+          jogosComPreco++;
+        }
+      });
+    }
+
+    if (jogosComPreco === 0) {
+      setStat("stat-valor-conta", "N/D");
+      setStat("stat-custo-hora", "N/D");
+      return;
+    }
+
+    // Converte USD centavos → BRL (estimativa: fator ~5.5)
+    const usd  = totalCentavos / 100;
+    const brl  = usd * 5.5;
+    setStat("stat-valor-conta", `R$ ${brl.toLocaleString("pt-BR", { maximumFractionDigits: 0 })}`);
+
+    // Custo por hora jogada
+    const horasTotal = totalMinutos / 60;
+    if (horasTotal > 0) {
+      const custoPorHora = brl / horasTotal;
+      setStat("stat-custo-hora", `R$ ${custoPorHora.toFixed(2)} / h`);
+    } else {
+      setStat("stat-custo-hora", "—");
+    }
+
+  } catch (e) {
+    console.warn("[Steam prices]", e.message);
+    setStat("stat-valor-conta", "Indisponível");
+    setStat("stat-custo-hora", "Indisponível");
+  }
 }
