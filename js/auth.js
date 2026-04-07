@@ -117,5 +117,10 @@ export async function salvarSteamId(uid, steamId, steamApiKey) {
   await updateDoc(doc(db, "usuarios", uid), dados);
 }
 
+export async function limparSteamId(uid) {
+  const { deleteField } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+  await updateDoc(doc(db, "usuarios", uid), { steamId: deleteField(), steamApiKey: deleteField() });
+}
+
 // ── Exporta instâncias para uso avançado ──
 export { auth, db };

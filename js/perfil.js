@@ -1,4 +1,4 @@
-import { onUsuarioMudou, loginGoogle, logout, getPerfil, removerJogo, salvarSteamId } from "./auth.js";
+import { onUsuarioMudou, loginGoogle, logout, getPerfil, removerJogo, salvarSteamId, limparSteamId } from "./auth.js";
 import { imgTag, abrirSteam, initHamburger, marcarNavAtivo } from "./utils.js";
 import { initAuthHeader } from "./authHeader.js";
 
@@ -100,16 +100,13 @@ async function carregarPerfil(user) {
   renderLista("lista-salvos",  salvos,  "salvos");
   renderLista("lista-jogados", jogados, "jogados");
 
-  // Se já tiver Steam ID salvo, preenche os campos automaticamente
+  mostrar(elContent);
+
+  // Se já tiver Steam ID salvo → carrega a biblioteca automaticamente
   if (perfil?.steamId) {
     document.getElementById("steam-id-input").value = perfil.steamId;
+    await buscarBibliotecaSteam({ silencioso: true });
   }
-  if (perfil?.steamApiKey) {
-    const keyEl = document.getElementById("steam-api-key-input");
-    if (keyEl) keyEl.value = perfil.steamApiKey;
-  }
-
-  mostrar(elContent);
 }
 
 // ── Botão login na página de perfil ──
@@ -144,11 +141,16 @@ function initSteam() {
   document.getElementById("steam-id-input").addEventListener("keydown", e => {
     if (e.key === "Enter") buscarBibliotecaSteam();
   });
-  document.getElementById("btn-trocar-steam").addEventListener("click", () => {
+  document.getElementById("btn-trocar-steam").addEventListener("click", async () => {
+    // Limpa o Steam ID salvo no Firestore
+    if (usuarioAtual) await limparSteamId(usuarioAtual.uid);
+    // Reseta a UI para o formulário
     document.getElementById("steam-resultado").classList.add("hidden");
     document.getElementById("steam-connect").classList.remove("hidden");
     document.getElementById("steam-id-input").value = "";
     document.getElementById("steam-form-erro").classList.add("hidden");
+    todosJogosSteam = [];
+    jogosFiltrados  = [];
   });
   document.getElementById("steam-search").addEventListener("input", e => {
     const q = e.target.value.toLowerCase().trim();
@@ -185,27 +187,29 @@ async function chamarApi(params) {
   return data;
 }
 
-async function buscarBibliotecaSteam() {
+async function buscarBibliotecaSteam({ silencioso = false } = {}) {
   const input  = document.getElementById("steam-id-input");
   const btn    = document.getElementById("btn-buscar-steam");
 
-  document.getElementById("steam-form-erro").classList.add("hidden");
+  if (!silencioso) {
+    document.getElementById("steam-form-erro").classList.add("hidden");
+  }
 
   const parsed = parseSteamInput(input.value);
   if (!parsed) {
-    mostrarErroSteam("⚠️ Informe a URL do perfil Steam ou seu Steam ID numérico.");
+    if (!silencioso) mostrarErroSteam("⚠️ Informe a URL do perfil Steam ou seu Steam ID numérico.");
     return;
   }
 
   btn.disabled    = true;
-  btn.textContent = "Buscando...";
+  btn.textContent = silencioso ? "Carregando Steam..." : "Buscando...";
 
   try {
     let steamId64 = parsed.valor;
 
     // Resolve nome de perfil → ID64 via backend
     if (parsed.tipo === "vanity") {
-      btn.textContent = "Resolvendo perfil...";
+      btn.textContent = silencioso ? "Carregando Steam..." : "Resolvendo perfil...";
       const res = await chamarApi({ action: "resolve-vanity", vanity: parsed.valor });
       steamId64 = res.steamid;
     }
@@ -233,7 +237,8 @@ async function buscarBibliotecaSteam() {
     document.getElementById("steam-resultado").classList.remove("hidden");
 
   } catch (e) {
-    mostrarErroSteam(`⚠️ ${e.message}`);
+    if (!silencioso) mostrarErroSteam(`⚠️ ${e.message}`);
+    else console.warn("[Steam auto-load]", e.message);
   } finally {
     btn.disabled    = false;
     btn.textContent = "Importar biblioteca";
