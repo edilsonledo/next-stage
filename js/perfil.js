@@ -5,7 +5,7 @@ import { initAuthHeader } from "./authHeader.js";
 window.abrirSteam = abrirSteam;
 
 // URL base do backend Vercel (mesmo repo, deploy separado)
-const API_BASE = "https://next-stage-api.vercel.app/api/steam";
+const API_BASE = "https://next-stage-edilsonledos-projects.vercel.app/api/steam";
 
 const elLoading  = document.getElementById("perfil-loading");
 const elNoLogin  = document.getElementById("perfil-nologin");
