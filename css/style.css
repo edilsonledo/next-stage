@@ -1479,3 +1479,151 @@
   .recursos-grid { grid-template-columns: 1fr; }
 }
 
+/* =============================================
+   WIP — Tela de Hub em Construção
+   ============================================= */
+.wip-box {
+  max-width: 680px;
+  margin: 60px auto 80px;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.wip-icon {
+  font-size: 72px;
+  margin-bottom: 16px;
+  animation: wip-wobble 2.4s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes wip-wobble {
+  0%, 100% { transform: rotate(-6deg) scale(1);    }
+  50%       { transform: rotate( 6deg) scale(1.08); }
+}
+
+.wip-title {
+  font-size: 32px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.wip-msg {
+  font-size: 16px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+
+.wip-game {
+  color: var(--accent);
+}
+
+/* Barra de progresso falsa e animada */
+.wip-progress {
+  margin: 0 auto 32px;
+  max-width: 420px;
+}
+
+.wip-progress__bar {
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.wip-progress__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 99px;
+  animation: wip-fill 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes wip-fill {
+  from { filter: brightness(1);    }
+  to   { filter: brightness(1.35); }
+}
+
+.wip-progress__label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.5px;
+}
+
+.wip-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 20px;
+}
+
+/* Links úteis da tela WIP */
+.wip-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+  margin-bottom: 36px;
+  text-align: left;
+}
+
+.wip-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  text-decoration: none;
+  color: #e8edf2;
+  transition: background 0.18s, border-color 0.18s, transform 0.15s;
+}
+
+.wip-link:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.wip-link__icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  width: 36px;
+  text-align: center;
+}
+
+.wip-link strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.wip-link small {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+}
+
+.wip-back {
+  display: inline-block;
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 8px 18px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.wip-back:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (max-width: 480px) {
+  .wip-links { grid-template-columns: 1fr; }
+  .wip-title { font-size: 24px; }
+  .wip-icon  { font-size: 56px; }
+}
+

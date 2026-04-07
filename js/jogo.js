@@ -340,40 +340,6 @@ const DB = {
 };
 
 // =============================================
-// Recursos Genéricos (para jogos não mapeados)
-// =============================================
-function getRecursosGenericos(nome, appid) {
-  const q = encodeURIComponent(nome);
-  return [
-    {
-      categoria: "🔍 Pesquisa rápida",
-      links: [
-        { label: "Google — Builds & Guias", url: `https://www.google.com/search?q=${q}+builds+guia`, desc: "Pesquise builds e guias no Google" },
-        { label: "Google — Mapa Interativo", url: `https://www.google.com/search?q=${q}+interactive+map`, desc: "Procure um mapa interativo" },
-        { label: "YouTube — Gameplay & Lore", url: `https://www.youtube.com/results?search_query=${q}+lore+explicado`, desc: "Vídeos de gameplay e lore no YouTube" },
-      ]
-    },
-    {
-      categoria: "🛠️ Ferramentas",
-      links: [
-        { label: "SteamDB", url: `https://www.steamdb.info/app/${appid}/`, desc: "Histórico de preços, DLCs e estatísticas" },
-        { label: "PCGamingWiki", url: `https://www.pcgamingwiki.com/w/index.php?search=${q}`, desc: "Fixes, mods e otimizações para PC" },
-        { label: "Nexus Mods", url: `https://www.nexusmods.com/search/?gsearch=${q}`, desc: "Mods da comunidade no Nexus" },
-        { label: "ProtonDB", url: `https://www.protondb.com/search#${q}`, desc: "Compatibilidade com Linux/Steam Deck" },
-      ]
-    },
-    {
-      categoria: "🤝 Comunidade",
-      links: [
-        { label: `Reddit — r/${nome.replace(/\s/g,'')}`, url: `https://www.reddit.com/search/?q=${q}&type=sr`, desc: "Procure o subreddit do jogo" },
-        { label: "Fextralife Wiki Search", url: `https://fextralife.com/?s=${q}`, desc: "Pesquise na rede de wikis Fextralife" },
-        { label: "Fandom Wiki Search", url: `https://www.fandom.com/explore?q=${q}`, desc: "Wikis da comunidade Fandom" },
-      ]
-    },
-  ];
-}
-
-// =============================================
 // Render
 // =============================================
 function renderHub() {
@@ -393,18 +359,102 @@ function renderHub() {
   document.getElementById("jogo-nome").textContent = nome;
   document.getElementById("jogo-steam-link").href = `https://store.steampowered.com/app/${APPID}/`;
 
-  // BG parallax (usa library_hero ou header como fallback)
   const heroBg = document.getElementById("jogo-hero-bg");
   heroBg.style.backgroundImage = `url('${bgUrl}')`;
 
-  const recursos = dados?.recursos || getRecursosGenericos(nome, APPID);
-  renderRecursos(recursos, "recursos-grid");
-
-  // Curiosidades
-  if (dados?.curiosidades?.length) {
-    document.getElementById("section-curiosidades").classList.remove("hidden");
-    renderCuriosidades(dados.curiosidades);
+  if (dados?.recursos) {
+    // Jogo mapeado: renderiza normalmente
+    renderRecursos(dados.recursos, "recursos-grid");
+    if (dados.curiosidades?.length) {
+      document.getElementById("section-curiosidades").classList.remove("hidden");
+      renderCuriosidades(dados.curiosidades);
+    }
+  } else {
+    // Jogo não mapeado: mostra tela de em construção divertida
+    renderEmConstrucao(nome);
   }
+}
+
+function renderEmConstrucao(nome) {
+  const q = encodeURIComponent(nome);
+  const appid = APPID;
+
+  // Substitui o conteúdo do main (dentro do container) por tela especial
+  const container = document.querySelector(".container");
+  container.innerHTML = `
+    <div class="wip-box">
+
+      <div class="wip-icon">🚧</div>
+
+      <h2 class="wip-title">Hub em construção</h2>
+
+      <p class="wip-msg">
+        Parece que você chegou antes do hub de
+        <strong class="wip-game">${nome}</strong>
+        estar pronto. Nosso time está trabalhando nisso —
+        provavelmente jogando o título para "pesquisar melhor o conteúdo". 🎮
+      </p>
+
+      <div class="wip-progress">
+        <div class="wip-progress__bar">
+          <div class="wip-progress__fill" style="width: ${Math.floor(Math.random() * 30) + 5}%"></div>
+        </div>
+        <span class="wip-progress__label">Carregando inspiração...</span>
+      </div>
+
+      <p class="wip-sub">
+        Enquanto isso, encontramos alguns links úteis que podem te salvar:
+      </p>
+
+      <div class="wip-links">
+        <a href="https://www.google.com/search?q=${q}+wiki+guia" target="_blank" rel="noopener" class="wip-link">
+          <span class="wip-link__icon">🔍</span>
+          <div>
+            <strong>Wiki & Guias no Google</strong>
+            <small>Pesquisa direta sobre ${nome}</small>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/results?search_query=${q}+guia+completo" target="_blank" rel="noopener" class="wip-link">
+          <span class="wip-link__icon">▶️</span>
+          <div>
+            <strong>Guias no YouTube</strong>
+            <small>Vídeos e walkthroughs completos</small>
+          </div>
+        </a>
+        <a href="https://www.google.com/search?q=${q}+interactive+map" target="_blank" rel="noopener" class="wip-link">
+          <span class="wip-link__icon">🗺️</span>
+          <div>
+            <strong>Mapa Interativo</strong>
+            <small>Encontre o mapa da comunidade</small>
+          </div>
+        </a>
+        <a href="https://www.reddit.com/search/?q=${q}&type=sr" target="_blank" rel="noopener" class="wip-link">
+          <span class="wip-link__icon">🗣️</span>
+          <div>
+            <strong>Subreddit no Reddit</strong>
+            <small>Comunidade do jogo com dicas e builds</small>
+          </div>
+        </a>
+        <a href="https://www.steamdb.info/app/${appid}/" target="_blank" rel="noopener" class="wip-link">
+          <span class="wip-link__icon">📊</span>
+          <div>
+            <strong>SteamDB</strong>
+            <small>Histórico de preços e estatísticas</small>
+          </div>
+        </a>
+        <a href="https://www.pcgamingwiki.com/w/index.php?search=${q}" target="_blank" rel="noopener" class="wip-link">
+          <span class="wip-link__icon">💻</span>
+          <div>
+            <strong>PCGamingWiki</strong>
+            <small>Fixes, mods e otimizações para PC</small>
+          </div>
+        </a>
+      </div>
+
+      <a href="perfil.html" class="wip-back">← Voltar para a biblioteca</a>
+
+    </div>
+  `;
 }
 
 function renderRecursos(recursos, containerId) {
